@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  NiConfigMaker.h
 //  NiConfigMaker
 //
 //  Created by Чайка on 3/16/13.
@@ -8,7 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface NiConfigMaker : NSObject /* <NSApplicationDelegate> */ {
+	NSWindow *window;
+}
 
 @property (assign) IBOutlet NSWindow *window;
 

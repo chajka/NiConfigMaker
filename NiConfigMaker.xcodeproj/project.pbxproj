@@ -7,17 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D773F5316F4389D0073C13D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D773F5216F4389D0073C13D /* Cocoa.framework */; };
 		1D773F5D16F4389D0073C13D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D773F5B16F4389D0073C13D /* InfoPlist.strings */; };
 		1D773F5F16F4389D0073C13D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D773F5E16F4389D0073C13D /* main.m */; };
 		1D773F6316F4389D0073C13D /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1D773F6116F4389D0073C13D /* Credits.rtf */; };
 		1D773F6916F4389D0073C13D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D773F6716F4389D0073C13D /* MainMenu.xib */; };
 		1D773F7116F4389D0073C13D /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D773F7016F4389D0073C13D /* SenTestingKit.framework */; };
-		1D773F7216F4389D0073C13D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D773F5216F4389D0073C13D /* Cocoa.framework */; };
 		1D773F7A16F4389D0073C13D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D773F7816F4389D0073C13D /* InfoPlist.strings */; };
 		1D773F7D16F4389D0073C13D /* NiConfigMakerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D773F7C16F4389D0073C13D /* NiConfigMakerTests.m */; };
 		1D773F8816F438EF0073C13D /* NiConfigMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D773F8716F438EF0073C13D /* NiConfigMaker.m */; };
 		1D773F8916F438EF0073C13D /* NiConfigMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D773F8716F438EF0073C13D /* NiConfigMaker.m */; };
+		1D773F9216F43B2D0073C13D /* AppleScriptKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D773F9016F43A590073C13D /* AppleScriptKit.framework */; };
+		1D773F9316F43B2D0073C13D /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D773F8E16F43A470073C13D /* AppKit.framework */; };
+		1D773F9416F43B2D0073C13D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D773F8C16F43A3F0073C13D /* Foundation.framework */; };
+		1D773F9516F43B2D0073C13D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D773F8A16F43A320073C13D /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,7 +34,6 @@
 
 /* Begin PBXFileReference section */
 		1D773F4F16F4389D0073C13D /* NiConfigMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NiConfigMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1D773F5216F4389D0073C13D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		1D773F5516F4389D0073C13D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		1D773F5616F4389D0073C13D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		1D773F5716F4389D0073C13D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -50,6 +51,10 @@
 		1D773F7C16F4389D0073C13D /* NiConfigMakerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NiConfigMakerTests.m; sourceTree = "<group>"; };
 		1D773F8616F438EF0073C13D /* NiConfigMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NiConfigMaker.h; sourceTree = "<group>"; };
 		1D773F8716F438EF0073C13D /* NiConfigMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NiConfigMaker.m; sourceTree = "<group>"; };
+		1D773F8A16F43A320073C13D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		1D773F8C16F43A3F0073C13D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		1D773F8E16F43A470073C13D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
+		1D773F9016F43A590073C13D /* AppleScriptKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppleScriptKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/AppleScriptKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +62,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D773F5316F4389D0073C13D /* Cocoa.framework in Frameworks */,
+				1D773F9216F43B2D0073C13D /* AppleScriptKit.framework in Frameworks */,
+				1D773F9316F43B2D0073C13D /* AppKit.framework in Frameworks */,
+				1D773F9416F43B2D0073C13D /* Foundation.framework in Frameworks */,
+				1D773F9516F43B2D0073C13D /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +74,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D773F7116F4389D0073C13D /* SenTestingKit.framework in Frameworks */,
-				1D773F7216F4389D0073C13D /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,7 +102,10 @@
 		1D773F5116F4389D0073C13D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1D773F5216F4389D0073C13D /* Cocoa.framework */,
+				1D773F9016F43A590073C13D /* AppleScriptKit.framework */,
+				1D773F8E16F43A470073C13D /* AppKit.framework */,
+				1D773F8C16F43A3F0073C13D /* Foundation.framework */,
+				1D773F8A16F43A320073C13D /* Cocoa.framework */,
 				1D773F7016F4389D0073C13D /* SenTestingKit.framework */,
 				1D773F5416F4389D0073C13D /* Other Frameworks */,
 			);
@@ -382,11 +392,16 @@
 		1D773F8116F4389D0073C13D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "Чайка";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NiConfigMaker/NiConfigMaker-Prefix.pch";
 				INFOPLIST_FILE = "NiConfigMaker/NiConfigMaker-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx10.5;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -394,11 +409,16 @@
 		1D773F8216F4389D0073C13D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "Чайка";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NiConfigMaker/NiConfigMaker-Prefix.pch";
 				INFOPLIST_FILE = "NiConfigMaker/NiConfigMaker-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx10.5;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
