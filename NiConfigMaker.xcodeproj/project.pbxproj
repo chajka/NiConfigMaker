@@ -1,0 +1,465 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D773F5316F4389D0073C13D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D773F5216F4389D0073C13D /* Cocoa.framework */; };
+		1D773F5D16F4389D0073C13D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D773F5B16F4389D0073C13D /* InfoPlist.strings */; };
+		1D773F5F16F4389D0073C13D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D773F5E16F4389D0073C13D /* main.m */; };
+		1D773F6316F4389D0073C13D /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1D773F6116F4389D0073C13D /* Credits.rtf */; };
+		1D773F6616F4389D0073C13D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D773F6516F4389D0073C13D /* AppDelegate.m */; };
+		1D773F6916F4389D0073C13D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D773F6716F4389D0073C13D /* MainMenu.xib */; };
+		1D773F7116F4389D0073C13D /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D773F7016F4389D0073C13D /* SenTestingKit.framework */; };
+		1D773F7216F4389D0073C13D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D773F5216F4389D0073C13D /* Cocoa.framework */; };
+		1D773F7A16F4389D0073C13D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D773F7816F4389D0073C13D /* InfoPlist.strings */; };
+		1D773F7D16F4389D0073C13D /* NiConfigMakerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D773F7C16F4389D0073C13D /* NiConfigMakerTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1D773F7316F4389D0073C13D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1D773F4716F4389C0073C13D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1D773F4E16F4389C0073C13D;
+			remoteInfo = NiConfigMaker;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1D773F4F16F4389D0073C13D /* NiConfigMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NiConfigMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D773F5216F4389D0073C13D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		1D773F5516F4389D0073C13D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		1D773F5616F4389D0073C13D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		1D773F5716F4389D0073C13D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D773F5A16F4389D0073C13D /* NiConfigMaker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NiConfigMaker-Info.plist"; sourceTree = "<group>"; };
+		1D773F5C16F4389D0073C13D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1D773F5E16F4389D0073C13D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1D773F6016F4389D0073C13D /* NiConfigMaker-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NiConfigMaker-Prefix.pch"; sourceTree = "<group>"; };
+		1D773F6216F4389D0073C13D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		1D773F6416F4389D0073C13D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1D773F6516F4389D0073C13D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1D773F6816F4389D0073C13D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		1D773F6F16F4389D0073C13D /* NiConfigMakerTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NiConfigMakerTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D773F7016F4389D0073C13D /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		1D773F7716F4389D0073C13D /* NiConfigMakerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NiConfigMakerTests-Info.plist"; sourceTree = "<group>"; };
+		1D773F7916F4389D0073C13D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1D773F7B16F4389D0073C13D /* NiConfigMakerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NiConfigMakerTests.h; sourceTree = "<group>"; };
+		1D773F7C16F4389D0073C13D /* NiConfigMakerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NiConfigMakerTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D773F4C16F4389C0073C13D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D773F5316F4389D0073C13D /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1D773F6B16F4389D0073C13D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D773F7116F4389D0073C13D /* SenTestingKit.framework in Frameworks */,
+				1D773F7216F4389D0073C13D /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1D773F4616F4389C0073C13D = {
+			isa = PBXGroup;
+			children = (
+				1D773F5816F4389D0073C13D /* NiConfigMaker */,
+				1D773F7516F4389D0073C13D /* NiConfigMakerTests */,
+				1D773F5116F4389D0073C13D /* Frameworks */,
+				1D773F5016F4389D0073C13D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1D773F5016F4389D0073C13D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D773F4F16F4389D0073C13D /* NiConfigMaker.app */,
+				1D773F6F16F4389D0073C13D /* NiConfigMakerTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1D773F5116F4389D0073C13D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1D773F5216F4389D0073C13D /* Cocoa.framework */,
+				1D773F7016F4389D0073C13D /* SenTestingKit.framework */,
+				1D773F5416F4389D0073C13D /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1D773F5416F4389D0073C13D /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1D773F5516F4389D0073C13D /* AppKit.framework */,
+				1D773F5616F4389D0073C13D /* CoreData.framework */,
+				1D773F5716F4389D0073C13D /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		1D773F5816F4389D0073C13D /* NiConfigMaker */ = {
+			isa = PBXGroup;
+			children = (
+				1D773F6416F4389D0073C13D /* AppDelegate.h */,
+				1D773F6516F4389D0073C13D /* AppDelegate.m */,
+				1D773F6716F4389D0073C13D /* MainMenu.xib */,
+				1D773F5916F4389D0073C13D /* Supporting Files */,
+			);
+			path = NiConfigMaker;
+			sourceTree = "<group>";
+		};
+		1D773F5916F4389D0073C13D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1D773F5A16F4389D0073C13D /* NiConfigMaker-Info.plist */,
+				1D773F5B16F4389D0073C13D /* InfoPlist.strings */,
+				1D773F5E16F4389D0073C13D /* main.m */,
+				1D773F6016F4389D0073C13D /* NiConfigMaker-Prefix.pch */,
+				1D773F6116F4389D0073C13D /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1D773F7516F4389D0073C13D /* NiConfigMakerTests */ = {
+			isa = PBXGroup;
+			children = (
+				1D773F7B16F4389D0073C13D /* NiConfigMakerTests.h */,
+				1D773F7C16F4389D0073C13D /* NiConfigMakerTests.m */,
+				1D773F7616F4389D0073C13D /* Supporting Files */,
+			);
+			path = NiConfigMakerTests;
+			sourceTree = "<group>";
+		};
+		1D773F7616F4389D0073C13D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1D773F7716F4389D0073C13D /* NiConfigMakerTests-Info.plist */,
+				1D773F7816F4389D0073C13D /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D773F4E16F4389C0073C13D /* NiConfigMaker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D773F8016F4389D0073C13D /* Build configuration list for PBXNativeTarget "NiConfigMaker" */;
+			buildPhases = (
+				1D773F4B16F4389C0073C13D /* Sources */,
+				1D773F4C16F4389C0073C13D /* Frameworks */,
+				1D773F4D16F4389C0073C13D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NiConfigMaker;
+			productName = NiConfigMaker;
+			productReference = 1D773F4F16F4389D0073C13D /* NiConfigMaker.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1D773F6E16F4389D0073C13D /* NiConfigMakerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D773F8316F4389D0073C13D /* Build configuration list for PBXNativeTarget "NiConfigMakerTests" */;
+			buildPhases = (
+				1D773F6A16F4389D0073C13D /* Sources */,
+				1D773F6B16F4389D0073C13D /* Frameworks */,
+				1D773F6C16F4389D0073C13D /* Resources */,
+				1D773F6D16F4389D0073C13D /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1D773F7416F4389D0073C13D /* PBXTargetDependency */,
+			);
+			name = NiConfigMakerTests;
+			productName = NiConfigMakerTests;
+			productReference = 1D773F6F16F4389D0073C13D /* NiConfigMakerTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1D773F4716F4389C0073C13D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Instrumentality of mankind";
+			};
+			buildConfigurationList = 1D773F4A16F4389C0073C13D /* Build configuration list for PBXProject "NiConfigMaker" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1D773F4616F4389C0073C13D;
+			productRefGroup = 1D773F5016F4389D0073C13D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D773F4E16F4389C0073C13D /* NiConfigMaker */,
+				1D773F6E16F4389D0073C13D /* NiConfigMakerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D773F4D16F4389C0073C13D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D773F5D16F4389D0073C13D /* InfoPlist.strings in Resources */,
+				1D773F6316F4389D0073C13D /* Credits.rtf in Resources */,
+				1D773F6916F4389D0073C13D /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1D773F6C16F4389D0073C13D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D773F7A16F4389D0073C13D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1D773F6D16F4389D0073C13D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D773F4B16F4389C0073C13D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D773F5F16F4389D0073C13D /* main.m in Sources */,
+				1D773F6616F4389D0073C13D /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1D773F6A16F4389D0073C13D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D773F7D16F4389D0073C13D /* NiConfigMakerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1D773F7416F4389D0073C13D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1D773F4E16F4389C0073C13D /* NiConfigMaker */;
+			targetProxy = 1D773F7316F4389D0073C13D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1D773F5B16F4389D0073C13D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1D773F5C16F4389D0073C13D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1D773F6116F4389D0073C13D /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1D773F6216F4389D0073C13D /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		1D773F6716F4389D0073C13D /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1D773F6816F4389D0073C13D /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		1D773F7816F4389D0073C13D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1D773F7916F4389D0073C13D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1D773F7E16F4389D0073C13D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		1D773F7F16F4389D0073C13D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		1D773F8116F4389D0073C13D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NiConfigMaker/NiConfigMaker-Prefix.pch";
+				INFOPLIST_FILE = "NiConfigMaker/NiConfigMaker-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1D773F8216F4389D0073C13D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NiConfigMaker/NiConfigMaker-Prefix.pch";
+				INFOPLIST_FILE = "NiConfigMaker/NiConfigMaker-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		1D773F8416F4389D0073C13D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NiConfigMaker.app/Contents/MacOS/NiConfigMaker";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NiConfigMaker/NiConfigMaker-Prefix.pch";
+				INFOPLIST_FILE = "NiConfigMakerTests/NiConfigMakerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		1D773F8516F4389D0073C13D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NiConfigMaker.app/Contents/MacOS/NiConfigMaker";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NiConfigMaker/NiConfigMaker-Prefix.pch";
+				INFOPLIST_FILE = "NiConfigMakerTests/NiConfigMakerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D773F4A16F4389C0073C13D /* Build configuration list for PBXProject "NiConfigMaker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D773F7E16F4389D0073C13D /* Debug */,
+				1D773F7F16F4389D0073C13D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1D773F8016F4389D0073C13D /* Build configuration list for PBXNativeTarget "NiConfigMaker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D773F8116F4389D0073C13D /* Debug */,
+				1D773F8216F4389D0073C13D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		1D773F8316F4389D0073C13D /* Build configuration list for PBXNativeTarget "NiConfigMakerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D773F8416F4389D0073C13D /* Debug */,
+				1D773F8516F4389D0073C13D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1D773F4716F4389C0073C13D /* Project object */;
+}
