@@ -11,12 +11,13 @@
 		1D773F5D16F4389D0073C13D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D773F5B16F4389D0073C13D /* InfoPlist.strings */; };
 		1D773F5F16F4389D0073C13D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D773F5E16F4389D0073C13D /* main.m */; };
 		1D773F6316F4389D0073C13D /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1D773F6116F4389D0073C13D /* Credits.rtf */; };
-		1D773F6616F4389D0073C13D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D773F6516F4389D0073C13D /* AppDelegate.m */; };
 		1D773F6916F4389D0073C13D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D773F6716F4389D0073C13D /* MainMenu.xib */; };
 		1D773F7116F4389D0073C13D /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D773F7016F4389D0073C13D /* SenTestingKit.framework */; };
 		1D773F7216F4389D0073C13D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D773F5216F4389D0073C13D /* Cocoa.framework */; };
 		1D773F7A16F4389D0073C13D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D773F7816F4389D0073C13D /* InfoPlist.strings */; };
 		1D773F7D16F4389D0073C13D /* NiConfigMakerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D773F7C16F4389D0073C13D /* NiConfigMakerTests.m */; };
+		1D773F8816F438EF0073C13D /* NiConfigMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D773F8716F438EF0073C13D /* NiConfigMaker.m */; };
+		1D773F8916F438EF0073C13D /* NiConfigMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D773F8716F438EF0073C13D /* NiConfigMaker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,8 +41,6 @@
 		1D773F5E16F4389D0073C13D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1D773F6016F4389D0073C13D /* NiConfigMaker-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NiConfigMaker-Prefix.pch"; sourceTree = "<group>"; };
 		1D773F6216F4389D0073C13D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		1D773F6416F4389D0073C13D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		1D773F6516F4389D0073C13D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1D773F6816F4389D0073C13D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		1D773F6F16F4389D0073C13D /* NiConfigMakerTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NiConfigMakerTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D773F7016F4389D0073C13D /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -49,6 +48,8 @@
 		1D773F7916F4389D0073C13D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1D773F7B16F4389D0073C13D /* NiConfigMakerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NiConfigMakerTests.h; sourceTree = "<group>"; };
 		1D773F7C16F4389D0073C13D /* NiConfigMakerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NiConfigMakerTests.m; sourceTree = "<group>"; };
+		1D773F8616F438EF0073C13D /* NiConfigMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NiConfigMaker.h; sourceTree = "<group>"; };
+		1D773F8716F438EF0073C13D /* NiConfigMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NiConfigMaker.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,8 +115,8 @@
 		1D773F5816F4389D0073C13D /* NiConfigMaker */ = {
 			isa = PBXGroup;
 			children = (
-				1D773F6416F4389D0073C13D /* AppDelegate.h */,
-				1D773F6516F4389D0073C13D /* AppDelegate.m */,
+				1D773F8616F438EF0073C13D /* NiConfigMaker.h */,
+				1D773F8716F438EF0073C13D /* NiConfigMaker.m */,
 				1D773F6716F4389D0073C13D /* MainMenu.xib */,
 				1D773F5916F4389D0073C13D /* Supporting Files */,
 			);
@@ -262,7 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D773F5F16F4389D0073C13D /* main.m in Sources */,
-				1D773F6616F4389D0073C13D /* AppDelegate.m in Sources */,
+				1D773F8816F438EF0073C13D /* NiConfigMaker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D773F7D16F4389D0073C13D /* NiConfigMakerTests.m in Sources */,
+				1D773F8916F438EF0073C13D /* NiConfigMaker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
