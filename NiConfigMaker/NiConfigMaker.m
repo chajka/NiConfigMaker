@@ -69,6 +69,24 @@
 
 - (IBAction) fmleInputSizeSelected:(NSPopUpButton *)sender
 {
+	NSMenuItem *fmleInputSizeItem = [sender selectedItem];
+	VideoSize selectedVideoSizeTag = [fmleInputSizeItem tag];
+	NSMenuItem *camTwistMenuItem = [[popupCamTwistVideoSize menu] itemWithTag:selectedVideoSizeTag];
+	
+	if (camTwistMenuItem != nil)
+	{
+		[popupCamTwistVideoSize selectItemWithTag:selectedVideoSizeTag];
+		self.camTwistCustomVideoSize = NO;
+		return;
+	}// end if CamTwist video size menu have fmle selected video size
+
+		// selected video size is not found in CamTwistMenu
+	NSString *selectedSizeString = [fmleInputSizeItem title];
+	NSArray *inputSizes = [selectedSizeString componentsSeparatedByString:VideoSizeSeparatorString];
+	[txtfldCamTwistCustomX setStringValue:[inputSizes objectAtIndex:0]];
+	[txtfldCamTwistCustomY setStringValue:[inputSizes lastObject]];
+	
+	self.camTwistCustomVideoSize = YES;
 }// end - (IBAction) fmleInputSizeSelected:(NSPopUpButton *)sender
 
 - (IBAction) camTwistVideoSizeSelected:(NSPopUpButton *)sender
