@@ -9,6 +9,9 @@
 
 #ifndef NiConfigMaker_NiConfigMakerDefinitions_h
 #define NiConfigMaker_NiConfigMakerDefinitions_h
+	// common definiton
+#define EmptyString						@""
+
 
 	// boolean must be false
 #define CamTwistKeyDriverSetting		@"dontLoadDriverUnlessAppRunning"
