@@ -46,6 +46,7 @@
 		// FMLE Video Settings
 	IBOutlet NSPopUpButton							*popupFMLEVideoFramerate;
 	IBOutlet NSPopUpButton							*popupFMLEVideoOutputFormat;
+	FMLEVideoFormatKind								fmleVideoOutputFormat;
 	BOOL											h264Selected;
 	IBOutlet NSPopUpButton							*popupFMLEVideoInputDeviceName;
 	IBOutlet NSPopUpButton							*popupFMLEVideoInputSize;
@@ -81,6 +82,7 @@
 @property (assign, readwrite) FMLEAudioFormatKind	fmleAudioOutputFormat;
 @property (assign, readwrite) BOOL					nellyMoserSelected;
 @property (assign, readwrite) BOOL					h264Selected;
+@property (assign, readwrite) FMLEVideoFormatKind	fmleVideoOutputFormat;
 @property (assign, readwrite) BOOL					aacSelected;
 
 #pragma mark - actions

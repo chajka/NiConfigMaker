@@ -21,6 +21,7 @@
 @synthesize fmleAudioOutputFormat;
 @synthesize nellyMoserSelected;
 @synthesize h264Selected;
+@synthesize fmleVideoOutputFormat;
 @synthesize aacSelected;
 
 - (id) init
@@ -79,14 +80,16 @@
 
 - (IBAction) fmleEncodingFormatSelected:(NSPopUpButton *)sender
 {
-	if ([[popupFMLEVideoOutputFormat titleOfSelectedItem] isEqualToString:@"H.264"])
-	{
-		self.h264Selected = YES;
-	}
-	else
-	{
-		self.h264Selected = NO;
-	}// end if
+	[popupFMLEAudioOutputFormat selectItemWithTag:KindMP3];
+	switch (fmleVideoOutputFormat) {
+		case KindH264:
+			self.h264Selected = YES;
+			break;
+		case KindVP6:
+		default:
+			self.h264Selected = NO;
+			break;
+	}// end case by Video output format
 }// end - (IBAction) fmleEncodingFormatSelected:(NSPopUpButton *)sender
 
 - (IBAction) fmleInputSizeSelected:(NSPopUpButton *)sender

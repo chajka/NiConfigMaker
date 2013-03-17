@@ -56,12 +56,29 @@
 #define CamTwistKeyVideoSize			@"videoSize"
 #define CamTwistVideSizeFormat			@"{%@, %@}"
 
+typedef NSInteger FMLEVideoFormatKind;
+enum FMLEVideoFormatKind {
+	KindH264 = 1001,
+	KindVP6
+};// end enum FMLEVideoFormatKind
+
 typedef NSInteger FMLEAudioFormatKind;
 enum FMLEAudioFormatKind {
 	KindAAC = 0,
 	KindMP3,
-	KindMellyMoser
+	KindNellyMoser
 };// end enum FMLEAudioFormatKind
+
+typedef NSInteger SampleRate;
+enum SampleRate {
+	SampleRate48000 = 1001,
+	SampleRate44100,
+	SampleRate32000,
+	SampleRate22050,
+	SampleRate11025,
+	SampleRate8500,
+	SampleRate5512
+};// end enum SampleRate
 
 typedef NSInteger VideoSize;
 enum VideoSize {
@@ -121,14 +138,6 @@ enum FrameRate {
 	FrameRate04_00,
 	FrameRate01_00
 };// end enum FrameRate
-
-typedef NSInteger SampleRate;
-enum SampleRate {
-	SampleRate22050,
-	SampleRate11025,
-	SampleRate8500,
-	SampleRate5512
-};// end enum SampleRate
 
 typedef NSInteger AudioBitRate;
 enum AudioBitRate {
