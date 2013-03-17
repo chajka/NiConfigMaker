@@ -31,6 +31,7 @@
 	BOOL							camTwistCustomVideoSize;
 	IBOutlet NSTextField			*txtfldCamTwistCustomX;
 	IBOutlet NSTextField			*txtfldCamTwistCustomY;
+	IBOutlet NSButton				*buttonCamTwistSaveConfig;
 
 		// FMLE Audio Settings
 	IBOutlet NSPopUpButton			*popupFMLEAudioInputDevice;
@@ -43,13 +44,28 @@
 		// FMLE Video Settings
 	IBOutlet NSPopUpButton			*popupFMLEVideoFramerate;
 	IBOutlet NSPopUpButton			*popupFMLEVideoOutputFormat;
+	BOOL							h264Selected;
 	IBOutlet NSPopUpButton			*popupFMLEVideoInputDeviceName;
 	IBOutlet NSPopUpButton			*popupFMLEVideoInputSize;
 	IBOutlet NSTextField			*txtfldFMLEVideoOutputSizeX;
 	IBOutlet NSTextField			*txtfldFMLEVideoOutputSizeY;
 	IBOutlet NSComboBox				*comboboxFMLEVideoOutputBitrate;
+		// Video encoding settings
+	IBOutlet NSDrawer				*drawerEncoderSettings;
+		// Settings for VP6
+	IBOutlet NSPopUpButton			*popupVP6KeyframeFrequency;
+	IBOutlet NSPopUpButton			*popupVP6Quqlity;
+	IBOutlet NSPopUpButton			*popupVP6NoiseReduction;
+	IBOutlet NSPopUpButton			*popupVP6DatarateWindow;
+	IBOutlet NSPopUpButton			*popupVP6CPUUseage;
+		// Settings for H.264
+	IBOutlet NSPopUpButton			*popupH264Profile;
+	IBOutlet NSPopUpButton			*popupH264Level;
+	IBOutlet NSPopUpButton			*popupH264KeyframeFrequency;
+	
 
 #pragma mark - program specific variables definitions
+@protected
 	NSArray							*audioDevices;
 	NSArray							*videoDevides;
 	NSPopUpButton *fmleSampleRateSelected;
@@ -58,6 +74,7 @@
 @property (assign, readwrite) BOOL	syncFrameRate;
 @property (assign, readwrite) BOOL	syncVideoSize;
 @property (assign, readwrite) BOOL	camTwistCustomVideoSize;
+@property (assign, readwrite) BOOL	h264Selected;
 
 #pragma mark - actions
 - (IBAction) fmleSampleRateSelected:(NSPopUpButton *)sender;
