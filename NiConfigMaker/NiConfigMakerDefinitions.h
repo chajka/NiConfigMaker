@@ -10,8 +10,20 @@
 #ifndef NiConfigMaker_NiConfigMakerDefinitions_h
 #define NiConfigMaker_NiConfigMakerDefinitions_h
 
+	// boolean must be false
+#define CamTwistKeyDriverSetting		@"dontLoadDriverUnlessAppRunning"
+// NSInteger frame rate
+#define CamTwistKeyFrameRate			@"frameRate"
+	// boolean virtualDriver
+#define CamTwistKeyVirtualDriver		@"noVirtualDriver"
+	// boolean use custom video size
+#define CamTwistKeyCustomVideoSize		@"usingCustomVideoSize"
+	// string video frame size
+#define CamTwistKeyVideoSize			@"videoSize"
+#define CamTwistVideSizeFormat			@"{%@, %@}"
+
 typedef NSInteger VideoSize;
-enum {
+enum VideoSize {
 	VideoSize88x72 = 1001,
 	VideoSize128x96,
 	VideoSize160x80,
@@ -51,7 +63,7 @@ enum {
 };
 
 typedef NSInteger FrameRate;
-enum {
+enum FrameRate {
 	FrameRate60_00,
 	FrameRate59_94,
 	FrameRate30_00,
@@ -70,7 +82,7 @@ enum {
 };
 
 typedef NSInteger SampleRate;
-enum {
+enum SampleRate {
 	SampleRate22050,
 	SampleRate11025,
 	SampleRate8500,
