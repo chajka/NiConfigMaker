@@ -20,8 +20,8 @@
 	IBOutlet NSComboBox				*comboboxTotalBitrate;
 	BOOL							adjustBitrate;
 		// FMLE Configure
-	IBOutlet NSPopUpButton			*popupFMLEConfigureNames;
-	IBOutlet NSTextField			*txtfldNewConfigureName;
+	IBOutlet NSPopUpButton			*popupFMLEProfileNames;
+	IBOutlet NSTextField			*txtfldNewProfileName;
 	BOOL							syncFrameRate;
 	BOOL							syncVideoSize;
 
@@ -36,6 +36,7 @@
 		// FMLE Audio Settings
 	IBOutlet NSPopUpButton			*popupFMLEAudioInputDevice;
 	IBOutlet NSPopUpButton			*popupFMLEAudioOutputFormat;
+	BOOL							nellyMoserSelected;
 	IBOutlet NSPopUpButton			*popupFMLEAudioOutputChannel;
 	IBOutlet NSPopUpButton			*popupFMLEAudioSamplerate;
 	IBOutlet NSPopUpButton			*popupFMLEAudioBitrate;
@@ -62,23 +63,28 @@
 	IBOutlet NSPopUpButton			*popupH264Profile;
 	IBOutlet NSPopUpButton			*popupH264Level;
 	IBOutlet NSPopUpButton			*popupH264KeyframeFrequency;
+	BOOL							aacSelected;
 	
 
 #pragma mark - program specific variables definitions
 @protected
 	NSArray							*audioDevices;
 	NSArray							*videoDevides;
+	NSArray							*fmleConfigurations;
 	NSPopUpButton *fmleSampleRateSelected;
 }
 @property (assign, readwrite) BOOL	adjustBitrate;
 @property (assign, readwrite) BOOL	syncFrameRate;
 @property (assign, readwrite) BOOL	syncVideoSize;
 @property (assign, readwrite) BOOL	camTwistCustomVideoSize;
+@property (assign, readwrite) BOOL	nellyMoserSelected;
 @property (assign, readwrite) BOOL	h264Selected;
+@property (assign, readwrite) BOOL	aacSelected;
 
 #pragma mark - actions
 - (IBAction) fmleSampleRateSelected:(NSPopUpButton *)sender;
 - (IBAction) fmleFrameRateSelected:(NSPopUpButton *)sender;
+- (IBAction) fmleEncodingFormatSelected:(NSPopUpButton *)sender;
 - (IBAction) fmleInputSizeSelected:(NSPopUpButton *)sender;
 - (IBAction) camTwistVideoSizeSelected:(NSPopUpButton *)sender;
 - (IBAction) camTwistSaveConfig:(NSButton *)sender;

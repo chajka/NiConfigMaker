@@ -10,7 +10,7 @@
 #import "NiConfigMaker.h"
 
 @interface NiConfigMaker ()
-
+- (NSArray *) collectFMLEConfgurations;
 @end
 
 @implementation NiConfigMaker
@@ -18,6 +18,9 @@
 @synthesize syncFrameRate;
 @synthesize syncVideoSize;
 @synthesize camTwistCustomVideoSize;
+@synthesize nellyMoserSelected;
+@synthesize h264Selected;
+@synthesize aacSelected;
 
 - (id) init
 {
@@ -26,6 +29,7 @@
 	{		// correct input devices
 		audioDevices = [QTCaptureDevice inputDevicesWithMediaType:QTMediaTypeSound];
 		videoDevides = [QTCaptureDevice inputDevicesWithMediaType:QTMediaTypeVideo];
+		fmleConfigurations = [self collectFMLEConfgurations];
 	}// end if
 
 	return self;
@@ -51,11 +55,16 @@
 	{
 		[popupFMLEVideoInputDeviceName addItemWithTitle:[device localizedDisplayName]];
 	}// end foreach FMLE input video devices
+
+		// fmle profiles
+	[popupFMLEProfileNames removeAllItems];
+	[popupFMLEProfileNames addItemsWithTitles:fmleConfigurations];
 }// end - (void) awakeFromNib
 
 - (void) applicationDidFinishLaunching:(NSNotification *)notification
 {
 	// Insert code here to initialize your application
+	[drawerEncoderSettings toggle:self];
 }// end - (void) applicationDidFinishLaunching:(NSNotification *)notification
 
 #pragma mark - actions
@@ -67,11 +76,30 @@
 {
 }// end - (IBAction) fmleFrameRateSelected:(NSPopUpButton *)sender
 
+- (IBAction) fmleEncodingFormatSelected:(NSPopUpButton *)sender
+{
+	if ([[popupFMLEVideoOutputFormat titleOfSelectedItem] isEqualToString:@"H.264"])
+	{
+		self.h264Selected = YES;
+	}
+	else
+	{
+		self.h264Selected = NO;
+	}// end if
+}// end - (IBAction) fmleEncodingFormatSelected:(NSPopUpButton *)sender
+
 - (IBAction) fmleInputSizeSelected:(NSPopUpButton *)sender
 {
 	NSMenuItem *fmleInputSizeItem = [sender selectedItem];
 	VideoSize selectedVideoSizeTag = [fmleInputSizeItem tag];
 	NSMenuItem *camTwistMenuItem = [[popupCamTwistVideoSize menu] itemWithTag:selectedVideoSizeTag];
+
+	NSString *selectedSizeString = [fmleInputSizeItem title];
+	NSArray *inputSizes = [selectedSizeString componentsSeparatedByString:VideoSizeSeparatorString];
+	NSString *videoSizeWidth = [inputSizes objectAtIndex:0];
+	NSString *videoSizeHeight = [inputSizes lastObject];
+	[txtfldFMLEVideoOutputSizeX setStringValue:videoSizeWidth];
+	[txtfldFMLEVideoOutputSizeY setStringValue:videoSizeHeight];
 	
 	if (camTwistMenuItem != nil)
 	{
@@ -81,10 +109,8 @@
 	}// end if CamTwist video size menu have fmle selected video size
 
 		// selected video size is not found in CamTwistMenu
-	NSString *selectedSizeString = [fmleInputSizeItem title];
-	NSArray *inputSizes = [selectedSizeString componentsSeparatedByString:VideoSizeSeparatorString];
-	[txtfldCamTwistCustomX setStringValue:[inputSizes objectAtIndex:0]];
-	[txtfldCamTwistCustomY setStringValue:[inputSizes lastObject]];
+	[txtfldCamTwistCustomX setStringValue:videoSizeWidth];
+	[txtfldCamTwistCustomY setStringValue:videoSizeHeight];
 	
 	self.camTwistCustomVideoSize = YES;
 }// end - (IBAction) fmleInputSizeSelected:(NSPopUpButton *)sender
@@ -96,4 +122,35 @@
 - (IBAction) camTwistSaveConfig:(NSButton *)sender
 {
 }// end - (IBAction) camTwistSaveConfig:(NSButton *)sender
+
+#pragma mark - private
+- (NSArray *) collectFMLEConfgurations
+{
+	NSError *err = nil;
+	NSFileManager *fm = [NSFileManager defaultManager];
+		// create path string
+	NSString *fmleProfileFolderPath = [FMLESettingPath stringByExpandingTildeInPath];
+		// check path is directory
+	BOOL isDir = NO;
+	BOOL exists = [fm fileExistsAtPath:fmleProfileFolderPath isDirectory:&isDir];
+	if ((exists == NO) || (isDir == NO))
+		return nil;
+
+		// get profiles in profile directory
+	NSArray *profiles = [fm contentsOfDirectoryAtPath:fmleProfileFolderPath error:&err];
+	if ((profiles == nil) || (err != nil))
+		return nil;
+
+		// make array of profile names
+	NSMutableArray *profileNames = [NSMutableArray array];
+	NSString *profileName = nil;
+	for (NSString *profile in profiles)
+	{
+		profileName = [[profile lastPathComponent] stringByDeletingPathExtension];
+		[profileNames addObject:profileName];
+		profileName = nil;
+	}// end foreach profiles
+
+	return ([profileNames count] != 0) ? [NSArray arrayWithArray:profileNames] : nil;
+}// end - (NSArray *) collectFMLEConfgurations
 @end
