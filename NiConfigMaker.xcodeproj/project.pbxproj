@@ -55,6 +55,7 @@
 		1D773F8C16F43A3F0073C13D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		1D773F8E16F43A470073C13D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
 		1D773F9016F43A590073C13D /* AppleScriptKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppleScriptKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/AppleScriptKit.framework; sourceTree = DEVELOPER_DIR; };
+		1D773F9616F44C580073C13D /* NiConfigMakerDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NiConfigMakerDefinitions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +126,7 @@
 		1D773F5816F4389D0073C13D /* NiConfigMaker */ = {
 			isa = PBXGroup;
 			children = (
+				1D773F9616F44C580073C13D /* NiConfigMakerDefinitions.h */,
 				1D773F8616F438EF0073C13D /* NiConfigMaker.h */,
 				1D773F8716F438EF0073C13D /* NiConfigMaker.m */,
 				1D773F6716F4389D0073C13D /* MainMenu.xib */,
@@ -402,6 +404,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx10.5;
+				VALID_ARCHS = i386;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -419,6 +422,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx10.5;
+				VALID_ARCHS = i386;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -472,6 +476,7 @@
 				1D773F8216F4389D0073C13D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1D773F8316F4389D0073C13D /* Build configuration list for PBXNativeTarget "NiConfigMakerTests" */ = {
 			isa = XCConfigurationList;
@@ -480,6 +485,7 @@
 				1D773F8516F4389D0073C13D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
