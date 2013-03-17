@@ -60,7 +60,7 @@ enum VideoSize {
 	VideoSize1280x720,
 	VideoSize1280x1080,
 	VideoSize1920x1080
-};
+};// end enum VideoSize
 
 typedef NSInteger FrameRate;
 enum FrameRate {
@@ -79,7 +79,7 @@ enum FrameRate {
 	FrameRate05_00,
 	FrameRate04_00,
 	FrameRate01_00
-};
+};// end enum FrameRate
 
 typedef NSInteger SampleRate;
 enum SampleRate {
@@ -87,10 +87,10 @@ enum SampleRate {
 	SampleRate11025,
 	SampleRate8500,
 	SampleRate5512
-};
+};// end enum SampleRate
 
 typedef NSInteger AudioBitRate;
-enum {
+enum AudioBitRate {
 	AudioBitRate224,
 	AudioBitRate192,
 	AudioBitRate160,
@@ -105,6 +105,6 @@ enum {
 	AudioBitRate24,
 	AudioBitRate20,
 	AudioBitRate18
-};
+};// end enum AudioBitRate
 
 #endif
