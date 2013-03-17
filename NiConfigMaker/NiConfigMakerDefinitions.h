@@ -56,6 +56,13 @@
 #define CamTwistKeyVideoSize			@"videoSize"
 #define CamTwistVideSizeFormat			@"{%@, %@}"
 
+typedef NSInteger FMLEAudioFormatKind;
+enum FMLEAudioFormatKind {
+	KindAAC = 0,
+	KindMP3,
+	KindMellyMoser
+};// end enum FMLEAudioFormatKind
+
 typedef NSInteger VideoSize;
 enum VideoSize {
 	VideoSize88x72 = 1001,

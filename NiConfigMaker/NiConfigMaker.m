@@ -18,6 +18,7 @@
 @synthesize syncFrameRate;
 @synthesize syncVideoSize;
 @synthesize camTwistCustomVideoSize;
+@synthesize fmleAudioOutputFormat;
 @synthesize nellyMoserSelected;
 @synthesize h264Selected;
 @synthesize aacSelected;
