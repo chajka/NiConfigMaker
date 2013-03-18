@@ -41,9 +41,11 @@
 	IBOutlet NSPopUpButton							*popupFMLEAudioOutputChannel;
 	IBOutlet NSPopUpButton							*popupFMLEAudioSamplerate;
 	IBOutlet NSPopUpButton							*popupFMLEAudioBitrate;
-	IBOutlet NSSlider								*popupFMLEAudioOutputVolume;
+	IBOutlet NSSlider								*sliderFMLEAudioInputVolume;
+	NSInteger										inputVolume;
 
 		// FMLE Video Settings
+	BOOL											preserveAspect;
 	IBOutlet NSPopUpButton							*popupFMLEVideoFramerate;
 	IBOutlet NSPopUpButton							*popupFMLEVideoOutputFormat;
 	FMLEVideoFormatKind								fmleVideoOutputFormat;
@@ -72,8 +74,9 @@
 @protected
 	NSArray											*audioDevices;
 	NSArray											*videoDevides;
-	NSArray											*fmleConfigurations;
-	NSPopUpButton									*fmleSampleRateSelected;
+	NSArray											*fmleProfiles;
+	NSString										*fmleProfilePath;
+	NSXMLDocument									*currentFMLEProfile;
 }
 @property (assign, readwrite) BOOL					adjustBitrate;
 @property (assign, readwrite) BOOL					syncFrameRate;
@@ -82,6 +85,8 @@
 @property (assign, readwrite) FMLEAudioFormatKind	fmleAudioOutputFormat;
 @property (assign, readwrite) BOOL					nellyMoserSelected;
 @property (assign, readwrite) BOOL					h264Selected;
+@property (assign, readwrite) NSInteger				inputVolume;
+@property (assign, readwrite) BOOL					preserveAspect;
 @property (assign, readwrite) FMLEVideoFormatKind	fmleVideoOutputFormat;
 @property (assign, readwrite) BOOL					aacSelected;
 

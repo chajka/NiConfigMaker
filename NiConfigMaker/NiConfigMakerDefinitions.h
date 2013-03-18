@@ -12,33 +12,38 @@
 	// common definiton
 #define EmptyString						@""
 #define VideoSizeSeparatorString		@"x"
+#define VideoSizeConstructFormat		@"%@x%@"
+#define PathSeparatorString				@"/"
 
 	// FMLE definition
 #define AdobeConfigureationPath			@"~/Library/Application Support/Adobe/"
 #define FMLEProfileFolderPrefix			@"Flash Media Live Encoder"
-#define FMLESettingPath					@"~/Library/Application Support/Adobe/Flash Media Live Encoder 3.2"
-#define FMLEVideoDeviceXPath			@"flashmedialiveencoder_profile/capture/video/device"
-#define FMLEVideoFrameRateXPath			@"flashmedialiveencoder_profile/capture/video/frame_rate"
-#define FMLEVideoFrameWidthXPath		@"flashmedialiveencoder_profile/capture/video/Size/width"
-#define FMLEVideoFrameHeightXPath		@"flashmedialiveencoder_profile/capture/video/Size/height"
-#define FMLEAdvancedVP6KeyFrameXPath	@"flashmedialiveencoder_profile/capture/video/advanced/keyframe_frequency"
-#define FMLEAdvancedVP6QualityXPath		@"flashmedialiveencoder_profile/capture/video/advanced/quality"
-#define FMLEAdvancedVP6NRXpath			@"flashmedialiveencoder_profile/capture/video/advanced/noise_reduction"
-#define FMLEAdvancedVP6DatarateXpath	@"flashmedialiveencoder_profile/capture/video/advanced/datarate_window"
-#define FMLEAdvancedVP6CPUUseage		@"flashmedialiveencoder_profile/capture/video/advanced/cpu_usage"
-#define FMLEAdvancedH264ProfileXPath	@"flashmedialiveencoder_profile/capture/video/advanced/profile"
-#define FMLEAdvancedH264LevelXPath		@"flashmedialiveencoder_profile/capture/video/advanced/level"
-#define FMLEAdvancedH264KeyFrameXPath	@"flashmedialiveencoder_profile/capture/video/advanced/keyframe_frequency"
-#define FMLEAudioDeviceNameXPath		@"flashmedialiveencoder_profile/capture/audio/device"
-#define FMLEAudioSampleRateXPath		@"flashmedialiveencoder_profile/capture/audio/sample_rate"
-#define FMLEAudioInputVolumeXPath		@"flashmedialiveencoder_profile/capture/audio/input_volume"
-#define FMLEAudioDeviceXPath			@"flashmedialiveencoder_profile/capture/audio/sample_rate"
-#define FMLEVideoKeepAspectXPath		@"flashmedialiveencoder_profile/process/video/preserve_aspect"
-#define FMLEEncodeFormatNameXPath		@"flashmedialiveencoder_profile/encode/video/format"
-#define FMLEEncodeDataRateXPath			@"flashmedialiveencoder_profile/encode/video/datarate"
-#define FMLEEncodeOutputSizeXPath		@"flashmedialiveencoder_profile/encode/video/outputsize"
-#define FMLEEncodeAudioFormatXPath		@"flashmedialiveencoder_profile/encode/audio/format"
-#define FMLEEncodeAudioDataRateXPath	@"flashmedialiveencoder_profile/encode/audio/datarate"
+#define FMLEProfilePath					@"~/Library/Application Support/Adobe/Flash Media Live Encoder 3.2"
+#define FMLEProfileExtension			@"xml"
+#define FMLEDefalutProfileName			@"startup"
+
+#define FMLEVideoDeviceXPath			@"/flashmedialiveencoder_profile/capture/video/device"						//
+#define FMLEVideoFrameRateXPath			@"/flashmedialiveencoder_profile/capture/video/frame_rate"					//
+#define FMLEVideoFrameWidthXPath		@"/flashmedialiveencoder_profile/capture/video/size/width"					//
+#define FMLEVideoFrameHeightXPath		@"/flashmedialiveencoder_profile/capture/video/size/height"					//
+#define FMLEAudioDeviceNameXPath		@"/flashmedialiveencoder_profile/capture/audio/device"						//
+#define FMLEAudioSampleRateXPath		@"/flashmedialiveencoder_profile/capture/audio/sample_rate"					//
+#define FMLEAudioInputVolumeXPath		@"/flashmedialiveencoder_profile/capture/audio/input_volume"				//
+#define FMLEAudioChannelsXPath			@"/flashmedialiveencoder_profile/capture/audio/channels"					//
+#define FMLEVideoKeepAspectXPath		@"/flashmedialiveencoder_profile/process/video/preserve_aspect"				//
+#define FMLEEncodeFormatNameXPath		@"/flashmedialiveencoder_profile/encode/video/format"						//
+#define FMLEEncodeDataRateXPath			@"/flashmedialiveencoder_profile/encode/video/datarate"						//
+#define FMLEEncodeOutputSizeXPath		@"/flashmedialiveencoder_profile/encode/video/outputsize"
+#define FMLEAdvancedVP6KeyFrameXPath	@"/flashmedialiveencoder_profile/encode/video/advanced/keyframe_frequency"	//
+#define FMLEAdvancedVP6QualityXPath		@"/flashmedialiveencoder_profile/encode/video/advanced/quality"			//
+#define FMLEAdvancedVP6NRXpath			@"/flashmedialiveencoder_profile/encode/video/advanced/noise_reduction"	//
+#define FMLEAdvancedVP6DatarateXpath	@"/flashmedialiveencoder_profile/encode/video/advanced/datarate_window"	//
+#define FMLEAdvancedVP6CPUUseage		@"/flashmedialiveencoder_profile/encode/video/advanced/cpu_usage"
+#define FMLEAdvancedH264ProfileXPath	@"/flashmedialiveencoder_profile/encode/video/advanced/profile"
+#define FMLEAdvancedH264LevelXPath		@"/flashmedialiveencoder_profile/encode/video/advanced/level"
+#define FMLEAdvancedH264KeyFrameXPath	@"/flashmedialiveencoder_profile/encode/video/advanced/keyframe_frequency"
+#define FMLEEncodeAudioFormatXPath		@"/flashmedialiveencoder_profile/encode/audio/format"						//
+#define FMLEEncodeAudioDataRateXPath	@"/flashmedialiveencoder_profile/encode/audio/datarate"						//
 #define FMLEDatarateOutputSizeFormat	@"%@;"
 
 	// CamTwist definition
