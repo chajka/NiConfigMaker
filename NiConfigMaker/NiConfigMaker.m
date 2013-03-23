@@ -11,7 +11,7 @@
 #import "NiConfigMaker+AudioBitrateMaskProperties.h"
 
 @interface NiConfigMaker ()
-- (NSArray *) collectFMLEConfgurations;
+- (NSArray *) collectFMLEProfiles;
 - (void) loadFMLEProfile:(NSString *)profile;
 - (NSString *) valueForXPath:(NSString *)xPath from:(NSXMLElement *)element;
 @end
@@ -81,7 +81,7 @@
 	{		// correct input devices
 		audioDevices = [QTCaptureDevice inputDevicesWithMediaType:QTMediaTypeSound];
 		videoDevides = [QTCaptureDevice inputDevicesWithMediaType:QTMediaTypeVideo];
-		fmleProfiles = [self collectFMLEConfgurations];
+		fmleProfiles = [self collectFMLEProfiles];
 	}// end if
 
 	return self;
@@ -287,7 +287,7 @@
 }// end - (IBAction) camTwistSaveConfig:(NSButton *)sender
 
 #pragma mark - private
-- (NSArray *) collectFMLEConfgurations
+- (NSArray *) collectFMLEProfiles
 {
 	NSError *err = nil;
 	NSFileManager *fm = [NSFileManager defaultManager];
@@ -315,7 +315,7 @@
 	}// end foreach profiles
 
 	return ([profileNames count] != 0) ? [NSArray arrayWithArray:profileNames] : nil;
-}// end - (NSArray *) collectFMLEConfgurations
+}// end - (NSArray *) collectFMLEProfiles
 
 - (void) loadFMLEProfile:(NSString *)profile
 {
