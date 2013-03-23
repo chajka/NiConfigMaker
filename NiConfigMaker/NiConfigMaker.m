@@ -8,6 +8,7 @@
 
 #import <QTKit/QTKit.h>
 #import "NiConfigMaker.h"
+#import "NiConfigMaker+AudioBitrateMaskProperties.h"
 
 @interface NiConfigMaker ()
 - (NSArray *) collectFMLEConfgurations;
@@ -19,13 +20,12 @@
 @synthesize adjustBitrate;
 @synthesize syncFrameRate;
 @synthesize syncVideoSize;
+
 @synthesize camTwistCustomVideoSize;
-@synthesize fmleAudioOutputFormat;
-@synthesize nellyMoserSelected;
+
 @synthesize h264Selected;
-@synthesize inputVolume;
 @synthesize preserveAspect;
-@synthesize fmleVideoOutputFormat;
+
 @synthesize enableVP6KeyframeFrequency;
 @synthesize enableVP6Quality;
 @synthesize enableVP6NoiseReduction;
@@ -34,26 +34,46 @@
 @synthesize enableH264Level;
 @synthesize enableH264Profile;
 @synthesize enableH264KeyframeFrequency;
-@synthesize aacSelected;
 
-@synthesize nerryMoser44100;
-@synthesize nerryMoser22050;
-@synthesize nerryMoser11025;
-@synthesize nerryMoser8000;
-@synthesize nerryMoser5512;
+@synthesize inputVolume;
+@synthesize aacSelectable;
+@synthesize nellyMoserSelected;
+@synthesize audioChannelTag;
+@synthesize audioSampleRateTag;
+@synthesize audioBitrateTag;
 
-@synthesize mp3Stereo44100;
-@synthesize mp3Monoral44100;
-@synthesize mp3Stereo22050;
-@synthesize mp3Monoral22050;
-@synthesize mp3Stereo11025;
-@synthesize mp3Monoral11025;
+@synthesize samplerateStatus48000;
+@synthesize samplerateStatus44100;
+@synthesize samplerateStatus32000;
+@synthesize samplerateStatus22050;
+@synthesize samplerateStatus11025;
+@synthesize samplerateStatus8000;
+@synthesize samplerateStatus5512;
 
-@synthesize aacCommonBitrate;
-@synthesize aacMonoral11025;
-@synthesize aacStereo8000;
-@synthesize aacMonoral8000;
-
+@synthesize	bitrateStatus320Kbps;
+@synthesize	bitrateStatus256Kbps;
+@synthesize	bitrateStatus224Kbps;
+@synthesize	bitrateStatus192Kbps;
+@synthesize	bitrateStatus160Kbps;
+@synthesize	bitrateStatus128Kbps;
+@synthesize	bitrateStatus112Kbps;
+@synthesize	bitrateStatus96Kbps;
+@synthesize bitrateStatus88Kbps;
+@synthesize	bitrateStatus80Kbps;
+@synthesize	bitrateStatus64Kbps;
+@synthesize	bitrateStatus56Kbps;
+@synthesize	bitrateStatus48Kbps;
+@synthesize bitrateStatus44Kbps;
+@synthesize	bitrateStatus40Kbps;
+@synthesize	bitrateStatus32Kbps;
+@synthesize	bitrateStatus28Kbps;
+@synthesize	bitrateStatus24Kbps;
+@synthesize bitrateStatus22Kbps;
+@synthesize	bitrateStatus20Kbps;
+@synthesize	bitrateStatus18Kbps;
+@synthesize	bitrateStatus16Kbps;
+@synthesize	bitrateStatus11Kbps;
+#pragma mark -
 - (id) init
 {
 	self = [super init];
@@ -104,10 +124,75 @@
 {
 		// load startup state
 	[popupFMLEProfileNames selectItemWithTitle:FMLEDefalutProfileName];
+	[popupFMLEProfileNames selectItemWithTitle:FMLEDefalutProfileName];
 	[self fmleProfileSelected:popupFMLEProfileNames];
 	// Insert code here to initialize your application
 	[drawerEncoderSettings toggle:self];
 }// end - (void) applicationDidFinishLaunching:(NSNotification *)notification
+
+#pragma mark - properties
+- (NSInteger) fmleVideoEncodeTag { return fmleVideoEncodeTag; }
+- (void) setFmleVideoEncodeTag:(NSInteger)value
+{
+	if (value == KindH264)
+		aacSelectable = YES;
+	else
+		aacSelectable = NO;;
+}// end - (void) setFmleVideoEncodeTag:value
+
+- (NSInteger) audioEncodeFormatTag { return audioEncodeFormatTag; }
+- (void) setAudioEncodeFormatTag:(NSInteger)value
+{
+	if (KindNellyMoser == value)
+		self.nellyMoserSelected = YES;
+	else
+		self.nellyMoserSelected = NO;
+	// end if
+	audioEncodeFormatTag = value;
+
+	NSIndexSet *indexes = nil;
+	NSInteger lastIndex;
+	lastIndex = [popupFMLEAudioSamplerate indexOfSelectedItem];
+	indexes = [self assignSamplrateStatus:audioEncodeFormatTag];
+	if ([indexes containsIndex:lastIndex] == NO)
+		[popupFMLEAudioSamplerate selectItemAtIndex:[indexes firstIndex]];
+	lastIndex = [popupFMLEAudioOutputBitrate indexOfSelectedItem];
+	indexes = [self assignBitrateStatuses:audioEncodeFormatTag channel:audioChannelTag];
+	if ([indexes containsIndex:lastIndex] == NO)
+		[popupFMLEAudioOutputBitrate selectItemAtIndex:[indexes firstIndex]];
+}// end - (void) setAudioEncodeTag:(NSInteger)value
+
+- (NSInteger) audioSampleRateTag { return audioSampleRateTag; }
+- (void) setAudioSampleRateTag:(NSInteger)value
+{
+	NSInteger lastBitrate = [popupFMLEAudioOutputBitrate indexOfSelectedItem];
+	audioSampleRateTag = value;
+	NSIndexSet *indexes = [self assignBitrateStatuses:audioEncodeFormatTag channel:audioChannelTag];
+	if ([indexes containsIndex:lastBitrate] == NO)
+		[popupFMLEAudioOutputBitrate selectItemAtIndex:[indexes firstIndex]];
+}// end - (void) setAudioSampleRateTag:(NSInteger)value
+
+- (BOOL) nellyMoserSelected { return nellyMoserSelected; }
+- (void) setNellyMoserSelected:(BOOL)value
+{
+	if (value == YES)
+	{
+		self.aacSelectable = NO;
+		self.audioChannelTag = KindMonoral;
+	}
+	nellyMoserSelected = value;
+
+	NSIndexSet *indexes = nil;
+	NSInteger lastIndex = 0;
+	lastIndex = [popupFMLEAudioSamplerate indexOfSelectedItem];
+	indexes = [self assignSamplrateStatus:audioEncodeFormatTag];
+	if ([indexes containsIndex:lastIndex] == NO)
+		[popupFMLEAudioSamplerate selectItemAtIndex:[indexes firstIndex]];
+	lastIndex = [popupFMLEAudioOutputBitrate indexOfSelectedItem];
+	indexes = [self assignBitrateStatuses:audioEncodeFormatTag channel:audioChannelTag];
+	if ([indexes containsIndex:lastIndex] == NO)
+		[popupFMLEAudioOutputBitrate selectItemAtIndex:[indexes firstIndex]];
+}// end - (void) setNerryMoserSelected:(BOOL)value
 
 #pragma mark - actions
 - (IBAction) fmleProfileSelected:(NSPopUpButton *)sender
@@ -124,24 +209,49 @@
 {
 }// end - (IBAction) fmleFrameRateSelected:(NSPopUpButton *)sender
 
-- (IBAction) fmleEncodingFormatSelected:(NSPopUpButton *)sender
-{
-	FMLEVideoFormatKind tag = [sender selectedTag];
-	switch (tag) {
+- (IBAction) fmleVideoEncodingFormatSelected:(NSPopUpButton *)sender
+{		// action of popupFMLEAudioOutputFormat
+	FMLEVideoFormatValue videoFormatTag = [sender selectedTag];
+	FMLEAudioFormatValue audioFormatTag = [popupFMLEAudioOutputFormat selectedTag];
+	switch (videoFormatTag) {
 		case KindH264:
+			if (audioFormatTag == KindNellyMoser)
+				self.audioEncodeFormatTag = KindMP3;
 			self.h264Selected = YES;
+			self.nellyMoserSelected = NO;
 			break;
 		case KindVP6:
 		default:
+			if (audioFormatTag == KindAAC)
+				self.audioEncodeFormatTag = KindMP3;
 			self.h264Selected = NO;
+			self.nellyMoserSelected = YES;
 			break;
 	}// end case by Video output format
 }// end - (IBAction) fmleEncodingFormatSelected:(NSPopUpButton *)sender
 
+- (IBAction) fmleAudioEncodingFormatSelected:(NSPopUpButton *)sender
+{
+	NSInteger selectedTag = [sender selectedTag];
+	NSInteger currentAudioTag = [popupFMLEAudioOutputFormat selectedTag];
+	if (KindH264 == YES)
+	{
+		self.aacSelectable = NO;
+		if (currentAudioTag == KindAAC)
+			[popupFMLEAudioOutputFormat selectItemWithTitle:EncodeTypeMP3];
+	}// end if
+	if (KindVP6 == selectedTag)
+	{
+		self.aacSelectable = YES;
+		if (currentAudioTag == KindNellyMoser)
+			[popupFMLEAudioOutputFormat selectItemWithTitle:EncodeTypeMP3];
+	}// end if
+}// end - (IBAction) fmleAudioEncodingFormatSelected:(NSPopUpButton *)sender
+
 - (IBAction) fmleInputSizeSelected:(NSPopUpButton *)sender
 {
 	NSMenuItem *fmleInputSizeItem = [sender selectedItem];
-	VideoSize selectedVideoSizeTag = [fmleInputSizeItem tag];
+	VideoSizeValue selectedVideoSizeTag = [fmleInputSizeItem tag];
 	NSMenuItem *camTwistMenuItem = [[popupCamTwistVideoSize menu] itemWithTag:selectedVideoSizeTag];
 
 	NSString *selectedSizeString = [fmleInputSizeItem title];
@@ -218,98 +328,116 @@
 
 		// parse and set to panel
 	NSString *item = nil;
-	NSInteger index = 0;
 	NSXMLElement *root = [currentFMLEProfile rootElement];
 
 			// capture
 		// inut video device
-	item = [self valueForXPath:FMLEVideoDeviceXPath from:root];
-	index = [popupFMLEVideoInputDeviceName indexOfItemWithTitle:item];
-	[popupFMLEVideoInputDeviceName selectItemAtIndex:index];
+	item = [self valueForXPath:FMLECaptureVideoDevice from:root];
+	[popupFMLEVideoInputDeviceName selectItemWithTitle:item];
 		// input video framerate
-	item = [self valueForXPath:FMLEVideoFrameRateXPath from:root];
+	item = [self valueForXPath:FMLECaptureVideoFrameRate from:root];
 	[popupFMLEVideoFramerate selectItemWithTitle:item];
-		// input video width
-	NSString *width = [self valueForXPath:FMLEVideoFrameWidthXPath from:root];
-	NSString *height = [self valueForXPath:FMLEVideoFrameHeightXPath from:root];
+	
+		// input video frame size
+	NSString *width = [self valueForXPath:FMLECaptureVideoFrameWidth from:root];
+	NSString *height = [self valueForXPath:FMLECaptureVideoFrameHeight from:root];
 	item = [NSString stringWithFormat:VideoSizeConstructFormat, width, height];
 	[popupFMLEVideoInputSize selectItemWithTitle:item];
 	[self fmleInputSizeSelected:popupFMLEVideoInputSize];
 		// input audio device
-	item = [self valueForXPath:FMLEAudioDeviceNameXPath from:root];
+	item = [self valueForXPath:FMLECaptureAudioDeviceName from:root];
 	[popupFMLEAudioInputDevice selectItemWithTitle:item];
 		// input sample rate
-	item = [self valueForXPath:FMLEAudioSampleRateXPath from:root];
+	item = [self valueForXPath:FMLECaptureAudioSampleRate from:root];
 	[popupFMLEAudioSamplerate selectItemWithTitle:item];
-		// input volume
-	item = [self valueForXPath:FMLEAudioInputVolumeXPath from:root];
-	self.inputVolume = [item integerValue];
+	self.audioSampleRateTag = [popupFMLEAudioSamplerate selectedTag];
 		// stereo / monoral
-	item = [self valueForXPath:FMLEAudioChannelsXPath from:root];
-	[popupFMLEAudioOutputChannel selectItemWithTitle:([item integerValue] == 2) ? @"Stereo" : @"Mono"];
+	item = [self valueForXPath:FMLECaptureAudioChannels from:root];
+	[popupFMLEAudioOutputChannel selectItemWithTitle:([item integerValue] == 2) ? ChannelStereo : ChannelMonoral];
+		// input volume
+	item = [self valueForXPath:FMLECaptureAudioInputVolume from:root];
+	self.inputVolume = [item integerValue];
+
+			// process
+		// aspect ratio
+	item = [self valueForXPath:FMLEProcessVideoPreserveAspect from:root];
+	self.preserveAspect = (item != nil) ? YES : NO;
+
+			// encode
+		// output video encode format
+	item = [self valueForXPath:FMLEEncodeVideoFormatName from:root];
+	[popupFMLEVideoOutputFormat selectItemWithTitle:item];
+	self.fmleVideoEncodeTag = [popupFMLEVideoOutputFormat selectedTag];
+	self.h264Selected = (fmleVideoEncodeTag == KindH264) ? YES : NO;
+		// output datarate
+	item = [self valueForXPath:FMLEEncodeVideoDataRate from:root];
+	item = [item substringWithRange:NSMakeRange(0, [item length] - 1)];
+	[popupFMLEAudioOutputBitrate selectItemWithTitle:item];
+	[comboboxFMLEVideoOutputBitrate setStringValue:item];
+		// output window size
+	item = [self valueForXPath:FMLEEncodeVideoOutputSize from:root];
+	NSArray *widthHeight = [[item substringWithRange:(NSMakeRange(0, [item length] - 1))] componentsSeparatedByString:VideoSizeSeparatorString];
+	[txtfldFMLEVideoOutputSizeX setStringValue:[widthHeight objectAtIndex:0]];
+	[txtfldFMLEVideoOutputSizeY setStringValue:[widthHeight lastObject]];
 
 			// capture detail settings for VP6
 		// keyframe frequency
-	item = [self valueForXPath:FMLEAdvancedVP6KeyFrameXPath from:root];
+	item = [self valueForXPath:FMLEAdvancedVideoVP6KeyFrame from:root];
 	if (item != nil)	[popupVP6KeyframeFrequency selectItemWithTitle:item];
 	self.enableVP6KeyframeFrequency = (item != nil) ? YES : NO;
 		// quality vs framerate
-	item = [self valueForXPath:FMLEAdvancedVP6QualityXPath from:root];
+	item = [self valueForXPath:FMLEAdvancedVP6Quality from:root];
 	if (item != nil)	[popupVP6Quality selectItemWithTitle:item];
 	self.enableVP6Quality = (item != nil) ? YES : NO;
 		// noise reduction
-	item = [self valueForXPath:FMLEAdvancedVP6NRXpath from:root];
+	item = [self valueForXPath:FMLEAdvancedVideoVP6NRXpath from:root];
 	if (item != nil)	[popupVP6NoiseReduction selectItemWithTitle:item];
 	self.enableVP6NoiseReduction = (item != nil) ? YES : NO;
 		// datarate window
-	item = [self valueForXPath:FMLEAdvancedVP6DatarateXpath from:root];
+	item = [self valueForXPath:FMLEAdvancedVideoVP6Datarate from:root];
 	if (item != nil)	[popupVP6DatarateWindow selectItemWithTitle:item];
 	self.enableVP6DatarateWindow = (item != nil) ? YES : NO;
 		// cpu useage
-	item = [self valueForXPath:FMLEAdvancedVP6CPUUseage from:root];
+	item = [self valueForXPath:FMLEAdvancedVideoVP6CPUUseage from:root];
 	if (item != nil)	[popupVP6CPUUseage selectItemWithTitle:item];
 	self.enableVP6CPUUseage = (item != nil) ? YES : NO;
 
 			// capture detail settings for H.264
 		// profile
-	item = [self valueForXPath:FMLEAdvancedH264ProfileXPath from:root];
+	item = [self valueForXPath:FMLEAdvancedH264Profile from:root];
 	if (item != nil)	[popupH264Profile selectItemWithTitle:item];
 	self.enableH264Profile = (item != nil) ? YES : NO;
 		// level
-	item = [self valueForXPath:FMLEAdvancedH264LevelXPath from:root];
+	item = [self valueForXPath:FMLEAdvancedVideoH264Level from:root];
 	if (item != nil)	[popupH264Level selectItemWithTitle:item];
 	self.enableH264Level = (item != nil) ? YES : NO;
 		// keyframe
-	item = [self valueForXPath:FMLEAdvancedH264KeyFrameXPath from:root];
+	item = [self valueForXPath:FMLEAdvancedH264KeyFrame from:root];
 	if (item != nil)	[popupH264KeyframeFrequency selectItemWithTitle:item];
 	self.enableH264KeyframeFrequency = (item != nil) ? YES : NO;
 
-			// process
-		// aspect ratio
-	item = [self valueForXPath:FMLEVideoKeepAspectXPath from:root];
-	self.preserveAspect = (item != nil) ? YES : NO;
-
-			// encode
-		// output video encode format
-	item = [self valueForXPath:FMLEEncodeFormatNameXPath from:root];
-	[popupFMLEVideoOutputFormat selectItemWithTitle:item];
-	[self fmleEncodingFormatSelected:popupFMLEVideoOutputFormat];
-		// output datarate
-	item = [self valueForXPath:FMLEEncodeDataRateXPath from:root];
-	item = [item substringWithRange:NSMakeRange(0, [item length] - 1)];
-	[comboboxFMLEVideoOutputBitrate setStringValue:item];
 		// encode format
-	item = [self valueForXPath:FMLEEncodeAudioFormatXPath from:root];
+	item = [self valueForXPath:FMLEEncodeAudioFormat from:root];
 	[popupFMLEAudioOutputFormat selectItemWithTitle:item];
-	self.nellyMoserSelected = ([item isEqualToString:@"NellyNoser"] == YES) ? YES : NO;
-		// output bitrate
-	item = [self valueForXPath:FMLEEncodeAudioDataRateXPath from:root];
-	[popupFMLEAudioBitrate selectItemWithTitle:item];
-		// output window size
-	item = [self valueForXPath:FMLEEncodeOutputSizeXPath from:root];
-	NSArray *widthHeight = [item componentsSeparatedByString:VideoSizeSeparatorString];
-	[txtfldFMLEVideoOutputSizeX setStringValue:[widthHeight objectAtIndex:0]];
-	[txtfldFMLEVideoOutputSizeY setStringValue:[widthHeight lastObject]];
+	switch ([popupFMLEAudioOutputFormat selectedTag])
+	{
+		case KindAAC:
+			self.aacSelectable = YES;
+			self.nellyMoserSelected = NO;
+			break;
+		case KindNellyMoser:
+			self.aacSelectable = NO;
+			self.nellyMoserSelected = YES;
+			break;
+		case KindMP3:
+		default:
+			self.aacSelectable = NO;
+			self.nellyMoserSelected = NO;
+			break;
+	}// end switch
+			// output bitrate
+	item = [self valueForXPath:FMLEEncodeAudioDataRate from:root];
+	[popupFMLEAudioOutputBitrate selectItemWithTitle:item];
 }// end - (void) loadFMLEProfile:(NSString *)profile
 
 - (NSString *) valueForXPath:(NSString *)xPath from:(NSXMLElement *)element

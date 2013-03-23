@@ -12,8 +12,9 @@
 	// common definiton
 #define EmptyString						@""
 #define VideoSizeSeparatorString		@"x"
-#define VideoSizeConstructFormat		@"%@x%@"
 #define PathSeparatorString				@"/"
+#define VideoSizeConstructFormat		@"%@x%@"
+#define FMLEDatarateOutputSizeFormat	@"%@;"
 
 	// FMLE definition
 #define AdobeConfigureationPath			@"~/Library/Application Support/Adobe/"
@@ -22,29 +23,32 @@
 #define FMLEProfileExtension			@"xml"
 #define FMLEDefalutProfileName			@"startup"
 
-#define FMLEVideoDeviceXPath			@"/flashmedialiveencoder_profile/capture/video/device"						//
-#define FMLEVideoFrameRateXPath			@"/flashmedialiveencoder_profile/capture/video/frame_rate"					//
-#define FMLEVideoFrameWidthXPath		@"/flashmedialiveencoder_profile/capture/video/size/width"					//
-#define FMLEVideoFrameHeightXPath		@"/flashmedialiveencoder_profile/capture/video/size/height"					//
-#define FMLEAudioDeviceNameXPath		@"/flashmedialiveencoder_profile/capture/audio/device"						//
-#define FMLEAudioSampleRateXPath		@"/flashmedialiveencoder_profile/capture/audio/sample_rate"					//
-#define FMLEAudioInputVolumeXPath		@"/flashmedialiveencoder_profile/capture/audio/input_volume"				//
-#define FMLEAudioChannelsXPath			@"/flashmedialiveencoder_profile/capture/audio/channels"					//
-#define FMLEVideoKeepAspectXPath		@"/flashmedialiveencoder_profile/process/video/preserve_aspect"				//
-#define FMLEEncodeFormatNameXPath		@"/flashmedialiveencoder_profile/encode/video/format"						//
-#define FMLEEncodeDataRateXPath			@"/flashmedialiveencoder_profile/encode/video/datarate"						//
-#define FMLEEncodeOutputSizeXPath		@"/flashmedialiveencoder_profile/encode/video/outputsize"
-#define FMLEAdvancedVP6KeyFrameXPath	@"/flashmedialiveencoder_profile/encode/video/advanced/keyframe_frequency"	//
-#define FMLEAdvancedVP6QualityXPath		@"/flashmedialiveencoder_profile/encode/video/advanced/quality"			//
-#define FMLEAdvancedVP6NRXpath			@"/flashmedialiveencoder_profile/encode/video/advanced/noise_reduction"	//
-#define FMLEAdvancedVP6DatarateXpath	@"/flashmedialiveencoder_profile/encode/video/advanced/datarate_window"	//
-#define FMLEAdvancedVP6CPUUseage		@"/flashmedialiveencoder_profile/encode/video/advanced/cpu_usage"
-#define FMLEAdvancedH264ProfileXPath	@"/flashmedialiveencoder_profile/encode/video/advanced/profile"
-#define FMLEAdvancedH264LevelXPath		@"/flashmedialiveencoder_profile/encode/video/advanced/level"
-#define FMLEAdvancedH264KeyFrameXPath	@"/flashmedialiveencoder_profile/encode/video/advanced/keyframe_frequency"
-#define FMLEEncodeAudioFormatXPath		@"/flashmedialiveencoder_profile/encode/audio/format"						//
-#define FMLEEncodeAudioDataRateXPath	@"/flashmedialiveencoder_profile/encode/audio/datarate"						//
-#define FMLEDatarateOutputSizeFormat	@"%@;"
+#define FMLECaptureVideoDevice			@"/flashmedialiveencoder_profile/capture/video/device"						//
+#define FMLECaptureVideoFrameRate		@"/flashmedialiveencoder_profile/capture/video/frame_rate"					//
+#define FMLECaptureVideoFrameWidth		@"/flashmedialiveencoder_profile/capture/video/size/width"					//
+#define FMLECaptureVideoFrameHeight		@"/flashmedialiveencoder_profile/capture/video/size/height"					//
+
+#define FMLECaptureAudioDeviceName		@"/flashmedialiveencoder_profile/capture/audio/device"						//
+#define FMLECaptureAudioSampleRate		@"/flashmedialiveencoder_profile/capture/audio/sample_rate"					//
+#define FMLECaptureAudioChannels		@"/flashmedialiveencoder_profile/capture/audio/channels"					//
+#define FMLECaptureAudioInputVolume		@"/flashmedialiveencoder_profile/capture/audio/input_volume"				//
+
+#define FMLEProcessVideoPreserveAspect	@"/flashmedialiveencoder_profile/process/video/preserve_aspect"				//
+
+#define FMLEEncodeVideoFormatName		@"/flashmedialiveencoder_profile/encode/video/format"						//
+#define FMLEEncodeVideoDataRate			@"/flashmedialiveencoder_profile/encode/video/datarate"						//
+#define FMLEEncodeVideoOutputSize		@"/flashmedialiveencoder_profile/encode/video/outputsize"
+
+#define FMLEAdvancedVideoVP6KeyFrame	@"/flashmedialiveencoder_profile/encode/video/advanced/keyframe_frequency"	//
+#define FMLEAdvancedVP6Quality			@"/flashmedialiveencoder_profile/encode/video/advanced/quality"			//
+#define FMLEAdvancedVideoVP6NRXpath		@"/flashmedialiveencoder_profile/encode/video/advanced/noise_reduction"	//
+#define FMLEAdvancedVideoVP6Datarate	@"/flashmedialiveencoder_profile/encode/video/advanced/datarate_window"	//
+#define FMLEAdvancedVideoVP6CPUUseage	@"/flashmedialiveencoder_profile/encode/video/advanced/cpu_usage"
+#define FMLEAdvancedH264Profile			@"/flashmedialiveencoder_profile/encode/video/advanced/profile"
+#define FMLEAdvancedVideoH264Level		@"/flashmedialiveencoder_profile/encode/video/advanced/level"
+#define FMLEAdvancedH264KeyFrame		@"/flashmedialiveencoder_profile/encode/video/advanced/keyframe_frequency"
+#define FMLEEncodeAudioFormat			@"/flashmedialiveencoder_profile/encode/audio/format"						//
+#define FMLEEncodeAudioDataRate			@"/flashmedialiveencoder_profile/encode/audio/datarate"						//
 
 	// CamTwist definition
 #define CamTwistConfigFilePath			@"~/Library/Preferences/com.allocinit.CamTwist.plist"
@@ -61,32 +65,78 @@
 #define CamTwistKeyVideoSize			@"videoSize"
 #define CamTwistVideSizeFormat			@"{%@, %@}"
 
-typedef NSInteger FMLEVideoFormatKind;
-enum FMLEVideoFormatKind {
+		// Video encode format
+#define EncodeTypeH264					@"H.264"
+#define EncodeTypeVP6					@"VP6"
+typedef NSInteger FMLEVideoFormatValue;
+enum FMLEVideoFormatValue {
 	KindH264 = 1001,
 	KindVP6
 };// end enum FMLEVideoFormatKind
 
-typedef NSInteger FMLEAudioFormatKind;
-enum FMLEAudioFormatKind {
-	KindAAC = 0,
+		// Audio encode format
+#define EncodeTypeAAC					@"AAC"
+#define EncodeTypeMP3					@"MP3"
+#define EncodeTypeNerryMoser			@"NerryMoser"
+typedef NSInteger FMLEAudioFormatValue;
+enum FMLEAudioFormatValue {
+	KindAAC = 1001,
 	KindMP3,
-	KindNellyMoser
+	KindNellyMoser,
 };// end enum FMLEAudioFormatKind
 
-typedef NSInteger SampleRate;
-enum SampleRate {
+
+	// Channel type string
+#define ChannelStereo					@"Stereo"
+#define ChannelMonoral					@"Mono"
+typedef NSInteger AudioChannelValue;
+enum AudioChannelValue {
+	KindStereo = 1001,
+	KindMonoral
+};
+
+typedef NSInteger SampleRateValue;
+enum SampleRateValue {
 	SampleRate48000 = 1001,
 	SampleRate44100,
 	SampleRate32000,
 	SampleRate22050,
 	SampleRate11025,
-	SampleRate8500,
+	SampleRate8000,
 	SampleRate5512
 };// end enum SampleRate
+#define SampleRateCount					(7)
 
-typedef NSInteger VideoSize;
-enum VideoSize {
+typedef NSInteger AudioBitRateValue;
+enum AudioBitRateValue {
+	AudioBitRate320 = 1001,
+	AudioBitRate256,
+	AudioBitRate224,
+	AudioBitRate192,
+	AudioBitRate160,
+	AudioBitRate128,
+	AudioBitRate112,
+	AudioBitRate96,
+	AudioBitRate88,
+	AudioBitRate80,
+	AudioBitRate64,
+	AudioBitRate56,
+	AudioBitRate48,
+	AudioBitRate44,
+	AudioBitRate40,
+	AudioBitRate32,
+	AudioBitRate28,
+	AudioBitRate24,
+	AudioBitRate22,
+	AudioBitRate20,
+	AudioBitRate18,
+	AudioBitRate16,
+	AudioBitRate11
+};// end enum AudioBitRate
+#define AudioBitrateCount				(23)
+
+typedef NSInteger VideoSizeValue;
+enum VideoSizeValue {
 	VideoSize88x72 = 1001,
 	VideoSize128x96,
 	VideoSize160x80,
@@ -125,8 +175,8 @@ enum VideoSize {
 	VideoSize1920x1080
 };// end enum VideoSize
 
-typedef NSInteger FrameRate;
-enum FrameRate {
+typedef NSInteger FrameRateValue;
+enum FrameRateValue {
 	FrameRate60_00,
 	FrameRate59_94,
 	FrameRate30_00,
@@ -143,23 +193,5 @@ enum FrameRate {
 	FrameRate04_00,
 	FrameRate01_00
 };// end enum FrameRate
-
-typedef NSInteger AudioBitRate;
-enum AudioBitRate {
-	AudioBitRate224,
-	AudioBitRate192,
-	AudioBitRate160,
-	AudioBitRate128,
-	AudioBitRate112,
-	AudioBitRate96,
-	AudioBitRate64,
-	AudioBitRate56,
-	AudioBitRate48,
-	AudioBitRate40,
-	AudioBitRate32,
-	AudioBitRate24,
-	AudioBitRate20,
-	AudioBitRate18
-};// end enum AudioBitRate
 
 #endif

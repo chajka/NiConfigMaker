@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1D2E3E1216F584CB004D6EE7 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D2E3E1016F584BA004D6EE7 /* QTKit.framework */; };
+		1D7654C716F8A93F00FF15B5 /* NiConfigMaker+AudioBitrateMaskProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7654C616F8A93F00FF15B5 /* NiConfigMaker+AudioBitrateMaskProperties.m */; };
 		1D773F5D16F4389D0073C13D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D773F5B16F4389D0073C13D /* InfoPlist.strings */; };
 		1D773F5F16F4389D0073C13D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D773F5E16F4389D0073C13D /* main.m */; };
 		1D773F6316F4389D0073C13D /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1D773F6116F4389D0073C13D /* Credits.rtf */; };
@@ -35,6 +36,8 @@
 
 /* Begin PBXFileReference section */
 		1D2E3E1016F584BA004D6EE7 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/QTKit.framework; sourceTree = DEVELOPER_DIR; };
+		1D7654C516F8A93F00FF15B5 /* NiConfigMaker+AudioBitrateMaskProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NiConfigMaker+AudioBitrateMaskProperties.h"; sourceTree = "<group>"; };
+		1D7654C616F8A93F00FF15B5 /* NiConfigMaker+AudioBitrateMaskProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NiConfigMaker+AudioBitrateMaskProperties.m"; sourceTree = "<group>"; };
 		1D773F4F16F4389D0073C13D /* NiConfigMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NiConfigMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D773F5516F4389D0073C13D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		1D773F5616F4389D0073C13D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -133,6 +136,8 @@
 				1D773F9616F44C580073C13D /* NiConfigMakerDefinitions.h */,
 				1D773F8616F438EF0073C13D /* NiConfigMaker.h */,
 				1D773F8716F438EF0073C13D /* NiConfigMaker.m */,
+				1D7654C516F8A93F00FF15B5 /* NiConfigMaker+AudioBitrateMaskProperties.h */,
+				1D7654C616F8A93F00FF15B5 /* NiConfigMaker+AudioBitrateMaskProperties.m */,
 				1D773F6716F4389D0073C13D /* MainMenu.xib */,
 				1D773F5916F4389D0073C13D /* Supporting Files */,
 			);
@@ -280,6 +285,7 @@
 			files = (
 				1D773F5F16F4389D0073C13D /* main.m in Sources */,
 				1D773F8816F438EF0073C13D /* NiConfigMaker.m in Sources */,
+				1D7654C716F8A93F00FF15B5 /* NiConfigMaker+AudioBitrateMaskProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
