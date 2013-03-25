@@ -55,7 +55,7 @@
 
 	// boolean must be false
 #define CamTwistKeyDriverSetting		@"dontLoadDriverUnlessAppRunning"
-// NSInteger frame rate
+	// NSInteger frame rate
 #define CamTwistKeyFrameRate			@"frameRate"
 	// boolean virtualDriver
 #define CamTwistKeyVirtualDriver		@"noVirtualDriver"
@@ -63,7 +63,8 @@
 #define CamTwistKeyCustomVideoSize		@"usingCustomVideoSize"
 	// string video frame size
 #define CamTwistKeyVideoSize			@"videoSize"
-#define CamTwistVideSizeFormat			@"{%@, %@}"
+#define CamTwistVideoSizeFormat			@"{%@, %@}"
+#define CamTwistVideoSizeSplitter		@", "
 
 		// Video encode format
 #define EncodeTypeH264					@"H.264"
@@ -87,8 +88,8 @@ enum FMLEAudioFormatValue {
 
 
 	// Channel type string
-#define ChannelStereo					@"Stereo"
-#define ChannelMonoral					@"Mono"
+#define ChannelStereo					@"2"
+#define ChannelMonoral					@"1"
 typedef NSInteger AudioChannelValue;
 enum AudioChannelValue {
 	KindStereo = 1001,

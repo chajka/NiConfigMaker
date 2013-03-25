@@ -18,7 +18,6 @@
 #pragma mark - user interface variable definitons
 		// common
 	IBOutlet NSComboBox								*comboboxTotalBitrate;
-	BOOL											adjustBitrate;
 		// FMLE Configure
 	IBOutlet NSPopUpButton							*popupFMLEProfileNames;
 	IBOutlet NSTextField							*txtfldNewProfileName;
@@ -29,8 +28,8 @@
 	IBOutlet NSTextField							*txtfldCamTwistFramerate;
 	IBOutlet NSPopUpButton							*popupCamTwistVideoSize;
 	BOOL											camTwistCustomVideoSize;
-	IBOutlet NSTextField							*txtfldCamTwistCustomX;
-	IBOutlet NSTextField							*txtfldCamTwistCustomY;
+	IBOutlet NSTextField							*txtfldCamTwistCustomWidth;
+	IBOutlet NSTextField							*txtfldCamTwistCustomHeight;
 	IBOutlet NSButton								*buttonCamTwistSaveConfig;
 
 		// FMLE Video Settings
@@ -82,13 +81,21 @@
 	IBOutlet NSPopUpButton							*popupFMLEAudioSamplerate;
 	IBOutlet NSPopUpButton							*popupFMLEAudioOutputBitrate;
 	IBOutlet NSSlider								*sliderFMLEAudioInputVolume;
-	BOOL											aacSelectable;
 	BOOL											nellyMoserSelected;
 	NSInteger										inputVolume;
+
+	NSInteger										videoEncodeFormatTag;
 	NSInteger										audioEncodeFormatTag;
 	NSInteger										audioChannelTag;
 	NSInteger										audioSampleRateTag;
 	NSInteger										audioBitrateTag;
+
+	NSInteger										tagVideoOutputFormat;
+	NSInteger										tagAudioOutputFormat;
+	NSInteger										tagAudioSamplerate;
+	NSInteger										tagAudioChannel;
+	NSInteger										tagAudioBitrate;
+
 
 		// current audio sample rate menu hidden flags
 	BOOL											samplerateStatus48000;
@@ -131,9 +138,14 @@
 	NSArray											*fmleProfiles;
 	NSString										*fmleProfilePath;
 	NSXMLDocument									*currentFMLEProfile;
+	NSDictionary									*camTwistPrefs;
+	NSDictionary									*videoOutputFormatDict;
+	NSDictionary									*audioOutputFormatDict;
+	NSDictionary									*audioSamplerateDict;
+	NSDictionary									*audioChannelDict;
+	NSDictionary									*audioBitrateDict;
 }
 	// FMLE Configure
-@property (assign, readwrite) BOOL					adjustBitrate;
 @property (assign, readwrite) BOOL					syncFrameRate;
 @property (assign, readwrite) BOOL					syncVideoSize;
 	// CamTwist Settings
@@ -155,12 +167,16 @@
 @property (assign, readwrite) BOOL					enableH264KeyframeFrequency;
 	// FMLE Audio Settings
 @property (assign, readwrite) NSInteger				inputVolume;
-@property (assign, readwrite) BOOL					aacSelectable;
 @property (assign, readwrite) BOOL					nellyMoserSelected;
-@property (assign, readwrite) NSInteger				audioEncodeFormatTag;
-@property (assign, readwrite) NSInteger				audioChannelTag;
-@property (assign, readwrite) NSInteger				audioSampleRateTag;
-@property (assign, readwrite) NSInteger				audioBitrateTag;
+
+	// encode setteing popup’s tags
+@property (assign, readwrite) NSInteger				tagVideoOutputFormat;
+@property (assign, readwrite) NSInteger				tagAudioOutputFormat;
+@property (assign, readwrite) NSInteger				tagAudioSamplerate;
+@property (assign, readwrite) NSInteger				tagAudioChannel;
+@property (assign, readwrite) NSInteger				tagAudioBitrate;
+
+
 
 	// current audio sampling rate show / hidden flags
 @property (assign, readwrite) BOOL					samplerateStatus48000;
@@ -202,6 +218,7 @@
 - (IBAction) fmleVideoEncodingFormatSelected:(NSPopUpButton *)sender;
 - (IBAction) fmleAudioEncodingFormatSelected:(NSPopUpButton *)sender;
 - (IBAction) fmleInputSizeSelected:(NSPopUpButton *)sender;
+- (IBAction) adjustBitrate:(NSButton *)sender;
 - (IBAction) camTwistVideoSizeSelected:(NSPopUpButton *)sender;
 - (IBAction) camTwistSaveConfig:(NSButton *)sender;
 

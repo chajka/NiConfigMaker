@@ -8,6 +8,6 @@
 
 #import "NiConfigMaker.h"
 @interface NiConfigMaker (AudioBitrateMaskProperties)
-- (NSIndexSet *) assignSamplrateStatus:(NSInteger)encodeType;
-- (NSIndexSet *) assignBitrateStatuses:(NSInteger)encodeType channel:(NSInteger)channel;
+- (NSIndexSet *) assignSamplrateByEncode:(NSInteger)encode;
+- (NSIndexSet *) assignBitrateByEncode:(NSInteger)encode samplerate:(NSInteger)samplerate  channel:(NSInteger)channel;
 @end
