@@ -154,7 +154,6 @@
 	// FMLE Video Settings
 @property (assign, readwrite) BOOL					h264Selected;
 @property (assign, readwrite) BOOL					preserveAspect;
-@property (assign, readwrite) NSInteger				fmleVideoEncodeTag;
 		// Video encoding settings
 	// Settings for VP6
 @property (assign, readwrite) BOOL					enableVP6KeyframeFrequency;
@@ -214,12 +213,11 @@
 
 #pragma mark - actions
 - (IBAction) fmleProfileSelected:(NSPopUpButton *)sender;
-- (IBAction) fmleSampleRateSelected:(NSPopUpButton *)sender;
 - (IBAction) fmleFrameRateSelected:(NSPopUpButton *)sender;
-- (IBAction) fmleVideoEncodingFormatSelected:(NSPopUpButton *)sender;
-- (IBAction) fmleAudioEncodingFormatSelected:(NSPopUpButton *)sender;
 - (IBAction) fmleInputSizeSelected:(NSPopUpButton *)sender;
 - (IBAction) adjustBitrate:(NSButton *)sender;
+- (IBAction) fmleSaveProfile:(NSButton *)sender;
+- (IBAction) removeFMLEProfile:(NSButton *)sender;
 - (IBAction) camTwistVideoSizeSelected:(NSPopUpButton *)sender;
 - (IBAction) camTwistSaveConfig:(NSButton *)sender;
 

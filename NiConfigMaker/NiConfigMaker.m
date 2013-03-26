@@ -15,10 +15,15 @@
 - (NSDictionary *) titleVsTagDictionary:(NSPopUpButton *)popup;
 - (NSDictionary *) camTwistPreference;
 - (void) loadCamTwistProfile;
+- (void) buildCamTwistPrefs;
 - (void) copyVideoSizeFromFMLEToCamTwist;
 - (NSArray *) collectFMLEProfiles;
 - (void) loadFMLEProfile:(NSString *)profile;
 - (NSString *) valueForXPath:(NSString *)xPath from:(NSXMLElement *)element;
+- (BOOL) rebuildProfile;
+- (void) setAspectRatio:(BOOL)enable to:(NSXMLElement *)element;
+- (void) setValue:(NSString *)value ofXPath:(NSString *)xPath to:(NSXMLElement *)element;
+- (NSInteger) selectNewItem:(NSPopUpButton *)popup lastIndex:(NSUInteger)lastIndex;
 @end
 
 @implementation NiConfigMaker
@@ -224,6 +229,12 @@
 	[self loadFMLEProfile:profile];
 }// end - (IBAction) fmleProfileSelected:(NSPopUpButton *)sender
 
+- (IBAction) fmleFrameRateSelected:(NSPopUpButton *)sender
+{
+	if (syncFrameRate == YES)
+		[txtfldCamTwistFramerate setStringValue:[[popupFMLEVideoFramerate selectedItem] title]];
+}// end - (IBAction) fmleFrameRateSelected:(NSPopUpButton *)sender
+
 - (IBAction) fmleInputSizeSelected:(NSPopUpButton *)sender
 {
 	NSMenuItem *fmleInputSizeItem = [sender selectedItem];
@@ -265,11 +276,25 @@
 
 		NSString *profilePath = [fmleProfilePath stringByAppendingPathComponent:saveProfileName];
 		profilePath = [profilePath stringByAppendingPathExtension:FMLEProfileExtension];
+		NSFileManager *fm = [NSFileManager defaultManager];
+		if ([fm fileExistsAtPath:profilePath] == NO)
+			[fm createFileAtPath:profilePath contents:nil attributes:nil];
+			
 		NSFileHandle *outFile = [NSFileHandle fileHandleForWritingAtPath:profilePath];
 		[outFile writeData:xmlData];
 		[outFile truncateFileAtOffset:[outFile offsetInFile]];
 	}// end if succes build profile
 }// end - (IBAction) fmleSaveProfile:(NSButton *)sender
+
+- (IBAction) removeFMLEProfile:(NSButton *)sender
+{
+	NSString *profileName = [[popupFMLEProfileNames selectedItem] title];
+	NSString *path = [[fmleProfilePath stringByAppendingPathComponent:profileName] stringByAppendingPathExtension:FMLEProfileExtension];
+
+	NSError *err = nil;
+	NSFileManager *fm = [NSFileManager defaultManager];
+	[fm removeItemAtPath:path error:&err];
+}// end - (IBAction) removeFMLEProfile:(NSButton *)sender
 
 - (IBAction) camTwistVideoSizeSelected:(NSPopUpButton *)sender
 {
@@ -283,7 +308,6 @@
 	[self buildCamTwistPrefs];
 
 	NSFileManager *fm = [NSFileManager defaultManager];
-	NSLog(@"%@", camTwistPrefPath);
 	NSString *camTwistBackupFile = [[camTwistPrefPath stringByDeletingPathExtension] stringByAppendingPathExtension:BackupFilePathExtension];
 	NSError *err = nil;
 	if ([fm fileExistsAtPath:camTwistBackupFile])
@@ -457,7 +481,7 @@
 	NSString *profilePath = [fmleProfilePath stringByAppendingPathComponent:profile];
 	profilePath = [profilePath stringByAppendingPathExtension:FMLEProfileExtension];
 	NSData *profileData = [NSData dataWithContentsOfFile:profilePath];
-	currentFMLEProfile = [[NSXMLDocument alloc] initWithData:profileData options:NSXMLDocumentTidyXML error:&err];
+	currentFMLEProfile = [[NSXMLDocument alloc] initWithData:profileData options:NSUTF16StringEncoding|NSXMLDocumentTidyXML error:&err];
 
 		// parse and set to panel
 	NSString *item = nil;
@@ -717,7 +741,6 @@
 		success = NO;
 	}// end try-catch block
 
-	NSLog(@"%@", [currentFMLEProfile XMLStringWithOptions:NSXMLDocumentTidyXML|NSXMLNodePrettyPrint]);
 	return success;
 }// end - (BOOL) rebuildProfile
 
