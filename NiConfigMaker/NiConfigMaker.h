@@ -137,8 +137,9 @@
 	NSArray											*videoDevides;
 	NSArray											*fmleProfiles;
 	NSString										*fmleProfilePath;
+	NSString										*camTwistPrefPath;
 	NSXMLDocument									*currentFMLEProfile;
-	NSDictionary									*camTwistPrefs;
+	NSMutableDictionary								*camTwistPrefs;
 	NSDictionary									*videoOutputFormatDict;
 	NSDictionary									*audioOutputFormatDict;
 	NSDictionary									*audioSamplerateDict;

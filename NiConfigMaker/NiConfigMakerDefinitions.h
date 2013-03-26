@@ -86,6 +86,7 @@
 #define CamTwistKeyVideoSize			@"videoSize"
 #define CamTwistVideoSizeFormat			@"{%@, %@}"
 #define CamTwistVideoSizeSplitter		@", "
+#define BackupFilePathExtension			@"bak"
 
 		// Video encode format
 #define EncodeTypeH264					@"H.264"

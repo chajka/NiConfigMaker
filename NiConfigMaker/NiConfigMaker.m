@@ -80,7 +80,7 @@
 		videoDevides = [QTCaptureDevice inputDevicesWithMediaType:QTMediaTypeVideo];
 		currentFMLEProfile = nil;
 		fmleProfiles = [self collectFMLEProfiles];
-		camTwistPrefs = [[NSDictionary alloc] initWithDictionary:[self camTwistPreference]];
+		camTwistPrefs = [[NSMutableDictionary alloc] initWithDictionary:[self camTwistPreference]];
 		syncFrameRate = NO;
 		syncVideoSize = NO;
 	}// end if
@@ -120,6 +120,9 @@
 	}// end foreach FMLE input video devices
 	[[[popupFMLEVideoInputDeviceName  menu] itemAtIndex:0] setState:NSOnState];
 
+		// CamTwist preference
+	[self loadCamTwistProfile];
+	
 		// fmle profiles
 	[popupFMLEProfileNames removeAllItems];
 	[popupFMLEProfileNames addItemsWithTitles:fmleProfiles];
@@ -253,16 +256,42 @@
 - (IBAction) fmleSaveProfile:(NSButton *)sender
 {
 	NSString *saveProfileName = [txtfldNewProfileName stringValue];
-	[self rebuildProfile];
-	
+	if ([self rebuildProfile] == YES)
+	{
+		NSData *xmlData = [currentFMLEProfile XMLDataWithOptions:NSUTF16StringEncoding|NSXMLDocumentTidyXML|NSXMLNodePrettyPrint];
+		if (xmlData == nil)
+			return;
+		// end if
+
+		NSString *profilePath = [fmleProfilePath stringByAppendingPathComponent:saveProfileName];
+		profilePath = [profilePath stringByAppendingPathExtension:FMLEProfileExtension];
+		NSFileHandle *outFile = [NSFileHandle fileHandleForWritingAtPath:profilePath];
+		[outFile writeData:xmlData];
+		[outFile truncateFileAtOffset:[outFile offsetInFile]];
+	}// end if succes build profile
 }// end - (IBAction) fmleSaveProfile:(NSButton *)sender
 
 - (IBAction) camTwistVideoSizeSelected:(NSPopUpButton *)sender
 {
+	[txtfldCamTwistCustomWidth setStringValue:@""];
+	[txtfldCamTwistCustomHeight setStringValue:@""];
+	self.camTwistCustomVideoSize = NO;
 }// end - (IBAction) camTwistVideoSizeSelected:(NSPopUpButton *)sender
 
 - (IBAction) camTwistSaveConfig:(NSButton *)sender
 {
+	[self buildCamTwistPrefs];
+
+	NSFileManager *fm = [NSFileManager defaultManager];
+	NSLog(@"%@", camTwistPrefPath);
+	NSString *camTwistBackupFile = [[camTwistPrefPath stringByDeletingPathExtension] stringByAppendingPathExtension:BackupFilePathExtension];
+	NSError *err = nil;
+	if ([fm fileExistsAtPath:camTwistBackupFile])
+		[fm removeItemAtPath:camTwistBackupFile error:&err];
+	if (err == nil)
+		[fm moveItemAtPath:camTwistPrefPath toPath:camTwistBackupFile error:&err];
+	if (err == nil)
+		[camTwistPrefs writeToFile:camTwistPrefPath atomically:YES];
 }// end - (IBAction) camTwistSaveConfig:(NSButton *)sender
 
 #pragma mark - private
@@ -301,16 +330,16 @@
 
 - (NSDictionary *) camTwistPreference
 {
-	NSString *camTwistPrefPath = [CamTwistConfigFilePath stringByExpandingTildeInPath];
+	camTwistPrefPath = [[NSString alloc] initWithString:[CamTwistConfigFilePath stringByExpandingTildeInPath]];
 	NSDictionary *pref = [NSDictionary dictionaryWithContentsOfFile:camTwistPrefPath];
-
+	
 	return pref;
 }// end - (NSDictionary *) camTwistPreference
 
 - (void) loadCamTwistProfile
 {
 	NSNumber *framerate = [camTwistPrefs valueForKey:CamTwistKeyFrameRate];
-	[txtfldCamTwistFramerate setValue:framerate];
+	[txtfldCamTwistFramerate setStringValue:[framerate stringValue]];
 	NSString *videoSizeString = [camTwistPrefs valueForKey:CamTwistKeyVideoSize];
 	videoSizeString = [videoSizeString substringWithRange:
 					   NSMakeRange(1, [videoSizeString length] -2)];
@@ -332,6 +361,33 @@
 	[txtfldCamTwistCustomHeight setStringValue:[videoSizeArray lastObject]];
 	self.camTwistCustomVideoSize = YES;
 }// end - (void) loadCamTwistProfile
+
+- (void) buildCamTwistPrefs
+{		// set framerate
+	NSString *framerateString = [txtfldCamTwistFramerate stringValue];
+	NSNumber *framerate = [NSNumber numberWithInteger:[framerateString integerValue]];
+	[camTwistPrefs setValue:framerate forKey:CamTwistKeyFrameRate];
+
+		// get window width height
+	NSString *width = nil;
+	NSString *height = nil;
+	if (camTwistCustomVideoSize == NO)
+	{
+		NSString *widthHeight = [[popupCamTwistVideoSize selectedItem] title];
+		NSArray *sizeArray = [widthHeight componentsSeparatedByString:VideoSizeSeparatorString];
+		width = [sizeArray objectAtIndex:0];
+		height = [sizeArray lastObject];
+	}
+	else
+	{
+		width = [txtfldCamTwistCustomWidth stringValue];
+		height = [txtfldCamTwistCustomHeight stringValue];
+	}
+	
+	NSString *camTwistVideoOutputString = [NSString stringWithFormat:CamTwistVideoSizeFormat, width, height];
+	[camTwistPrefs setValue:camTwistVideoOutputString forKey:CamTwistKeyVideoSize];
+	[camTwistPrefs setValue:[NSNumber numberWithBool:camTwistCustomVideoSize] forKey:CamTwistKeyCustomVideoSize];
+}// end - (void) buildCamTwistPrefs
 
 - (void) copyVideoSizeFromFMLEToCamTwist
 {
@@ -661,7 +717,7 @@
 		success = NO;
 	}// end try-catch block
 
-	NSLog(@"%@", [currentFMLEProfile XMLDataWithOptions:<#(NSUInteger)#>:NSXMLDocumentTidyXML|NSXMLNodePrettyPrint]);
+	NSLog(@"%@", [currentFMLEProfile XMLStringWithOptions:NSXMLDocumentTidyXML|NSXMLNodePrettyPrint]);
 	return success;
 }// end - (BOOL) rebuildProfile
 
