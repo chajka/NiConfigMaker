@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D0C4F031701A4F500C6F5B6 /* NiConfigMaker.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1D0C4F021701A4F500C6F5B6 /* NiConfigMaker.icns */; };
 		1D2E3E1216F584CB004D6EE7 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D2E3E1016F584BA004D6EE7 /* QTKit.framework */; };
 		1D7654C716F8A93F00FF15B5 /* NiConfigMaker+AudioBitrateMaskProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7654C616F8A93F00FF15B5 /* NiConfigMaker+AudioBitrateMaskProperties.m */; };
 		1D773F5D16F4389D0073C13D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D773F5B16F4389D0073C13D /* InfoPlist.strings */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D0C4F021701A4F500C6F5B6 /* NiConfigMaker.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = NiConfigMaker.icns; sourceTree = "<group>"; };
 		1D2E3E1016F584BA004D6EE7 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/QTKit.framework; sourceTree = DEVELOPER_DIR; };
 		1D7654C516F8A93F00FF15B5 /* NiConfigMaker+AudioBitrateMaskProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NiConfigMaker+AudioBitrateMaskProperties.h"; sourceTree = "<group>"; };
 		1D7654C616F8A93F00FF15B5 /* NiConfigMaker+AudioBitrateMaskProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NiConfigMaker+AudioBitrateMaskProperties.m"; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				1D773F5E16F4389D0073C13D /* main.m */,
 				1D773F6016F4389D0073C13D /* NiConfigMaker-Prefix.pch */,
 				1D773F6116F4389D0073C13D /* Credits.rtf */,
+				1D0C4F021701A4F500C6F5B6 /* NiConfigMaker.icns */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				1D773F5D16F4389D0073C13D /* InfoPlist.strings in Resources */,
 				1D773F6316F4389D0073C13D /* Credits.rtf in Resources */,
 				1D773F6916F4389D0073C13D /* MainMenu.xib in Resources */,
+				1D0C4F031701A4F500C6F5B6 /* NiConfigMaker.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
