@@ -78,6 +78,7 @@
 	{		// correct input devices
 		audioDevices = [QTCaptureDevice inputDevicesWithMediaType:QTMediaTypeSound];
 		videoDevides = [QTCaptureDevice inputDevicesWithMediaType:QTMediaTypeVideo];
+		currentFMLEProfile = nil;
 		fmleProfiles = [self collectFMLEProfiles];
 		camTwistPrefs = [[NSDictionary alloc] initWithDictionary:[self camTwistPreference]];
 		syncFrameRate = NO;
@@ -197,64 +198,6 @@
 	tagAudioBitrate = value;
 }// end - (void) settagAudioBitrate:(NSInteger):value
 
-/*
-- (NSInteger) fmleVideoEncodeTag { return fmleVideoEncodeTag; }
-- (void) setFmleVideoEncodeTag:(NSInteger)value
-{
-	fmleVideoEncodeTag = value;
-	self.h264Selected = (fmleVideoEncodeTag ==KindH264) ? YES : NO;
-}// end - (void) setFmleVideoEncodeTag:value
-
-- (NSInteger) audioEncodeFormatTag { return audioEncodeFormatTag; }
-- (void) setAudioEncodeFormatTag:(NSInteger)value
-{
-	if (KindNellyMoser == value)
-		self.nellyMoserSelected = YES;
-	else
-		self.nellyMoserSelected = NO;
-	// end if
-	audioEncodeFormatTag = value;
-
-	NSIndexSet *indexes = nil;
-	NSInteger lastIndex;
-	lastIndex = [popupFMLEAudioSamplerate indexOfSelectedItem];
-	indexes = [self assignSamplrateStatus:audioEncodeFormatTag];
-	if ([indexes containsIndex:lastIndex] == NO)
-		[popupFMLEAudioSamplerate selectItemAtIndex:[indexes firstIndex]];
-	lastIndex = [popupFMLEAudioOutputBitrate indexOfSelectedItem];
-	indexes = [self assignBitrateStatuses:audioEncodeFormatTag channel:audioChannelTag];
-	if ([indexes containsIndex:lastIndex] == NO)
-		[popupFMLEAudioOutputBitrate selectItemAtIndex:[indexes firstIndex]];
-}// end - (void) setAudioEncodeTag:(NSInteger)value
-
-- (NSInteger) audioSampleRateTag { return audioSampleRateTag; }
-- (void) setAudioSampleRateTag:(NSInteger)value
-{
-	NSInteger lastBitrate = [popupFMLEAudioOutputBitrate indexOfSelectedItem];
-	audioSampleRateTag = value;
-	NSIndexSet *indexes = [self assignBitrateStatuses:audioEncodeFormatTag channel:audioChannelTag];
-	if ([indexes containsIndex:lastBitrate] == NO)
-		[popupFMLEAudioOutputBitrate selectItemAtIndex:[indexes firstIndex]];
-}// end - (void) setAudioSampleRateTag:(NSInteger)value
-
-- (BOOL) nellyMoserSelected { return nellyMoserSelected; }
-- (void) setNellyMoserSelected:(BOOL)value
-{
-	nellyMoserSelected = value;
-
-	NSIndexSet *indexes = nil;
-	NSInteger lastIndex = 0;
-	lastIndex = [popupFMLEAudioSamplerate indexOfSelectedItem];
-	indexes = [self assignSamplrateStatus:audioEncodeFormatTag];
-	if ([indexes containsIndex:lastIndex] == NO)
-		[popupFMLEAudioSamplerate selectItemAtIndex:[indexes firstIndex]];
-	lastIndex = [popupFMLEAudioOutputBitrate indexOfSelectedItem];
-	indexes = [self assignBitrateStatuses:audioEncodeFormatTag channel:audioChannelTag];
-	if ([indexes containsIndex:lastIndex] == NO)
-		[popupFMLEAudioOutputBitrate selectItemAtIndex:[indexes firstIndex]];
-
-}// end - (void) setNerryMoserSelected:(BOOL)value
-*/
 - (BOOL) syncFrameRate { return syncFrameRate; }
 - (void) setSyncFrameRate:(BOOL)value
 {
@@ -277,14 +220,6 @@
 	NSString *profile = [[sender selectedItem] title];
 	[self loadFMLEProfile:profile];
 }// end - (IBAction) fmleProfileSelected:(NSPopUpButton *)sender
-
-- (IBAction) fmleSampleRateSelected:(NSPopUpButton *)sender
-{
-}// end - (IBAction) fmleSampleRateSelected:(NSPopUpButton *)sender
-
-- (IBAction) fmleFrameRateSelected:(NSPopUpButton *)sender
-{
-}// end - (IBAction) fmleFrameRateSelected:(NSPopUpButton *)sender
 
 - (IBAction) fmleInputSizeSelected:(NSPopUpButton *)sender
 {
@@ -314,6 +249,13 @@
 	[comboboxFMLEVideoOutputBitrate addItemWithObjectValue:bitrate];
 	[comboboxFMLEVideoOutputBitrate selectItemWithObjectValue:bitrate];
 }// end - (void) setAdjustBitrate
+
+- (IBAction) fmleSaveProfile:(NSButton *)sender
+{
+	NSString *saveProfileName = [txtfldNewProfileName stringValue];
+	[self rebuildProfile];
+	
+}// end - (IBAction) fmleSaveProfile:(NSButton *)sender
 
 - (IBAction) camTwistVideoSizeSelected:(NSPopUpButton *)sender
 {
@@ -451,6 +393,8 @@
 
 - (void) loadFMLEProfile:(NSString *)profile
 {
+	if (currentFMLEProfile != nil)		[currentFMLEProfile release];
+
 		// load profile
 	NSNumber *tag = nil;
 	NSError *err = nil;
@@ -476,7 +420,7 @@
 		// input video frame size
 	NSString *width = [self valueForXPath:FMLECaptureVideoFrameWidth from:root];
 	NSString *height = [self valueForXPath:FMLECaptureVideoFrameHeight from:root];
-	item = [NSString stringWithFormat:VideoSizeConstructFormat, width, height];
+	item = [NSString stringWithFormat:FMLEVideoSizeConstructFormat, width, height];
 	[popupFMLEVideoInputSize selectItemWithTitle:item];
 		// input audio device
 	item = [self valueForXPath:FMLECaptureAudioDeviceName from:root];
@@ -594,6 +538,181 @@
 
 	return [node stringValue];
 }// end - (NSString *) valueForXPath:(NSString *)xPath from:(NSXMLElement *)element
+
+- (BOOL) rebuildProfile
+{
+	BOOL success = YES;
+	@try {
+		NSError *err;
+		NSXMLElement *root = [currentFMLEProfile rootElement];
+		NSString *value = nil;
+				// capture
+			// video
+		value = [[popupFMLEVideoInputDeviceName selectedItem] title];
+		[self setValue:value ofXPath:FMLECaptureVideoDevice to:root];
+		
+		value = [[popupFMLEVideoFramerate selectedItem] title];
+		[self setValue:value ofXPath:FMLECaptureVideoFrameRate to:root];
+		
+		value = [[popupFMLEVideoInputSize selectedItem] title];
+		NSArray *widthHeight = [value componentsSeparatedByString:VideoSizeSeparatorString];
+		[self setValue:[widthHeight objectAtIndex:0] ofXPath:FMLECaptureVideoFrameWidth to:root];
+		[self setValue:[widthHeight lastObject] ofXPath:FMLECaptureVideoFrameHeight to:root];
+			// audio
+		value = [[popupFMLEAudioInputDevice selectedItem] title];
+		[self setValue:value ofXPath:FMLECaptureAudioDeviceName to:root];
+		
+		value = [[popupFMLEAudioSamplerate selectedItem] title];
+		[self setValue:value ofXPath:FMLECaptureAudioSampleRate to:root];
+		
+		value = ([[[popupFMLEAudioOutputChannel selectedItem] title] isEqualToString:Stereo] == YES) ?
+		ChannelStereo : ChannelMonoral;
+		[self setValue:value ofXPath:FMLECaptureAudioChannels to:root];
+		
+		value = [NSString stringWithFormat:@"%ld", (long)inputVolume];
+		[self setValue:value ofXPath:FMLECaptureAudioInputVolume to:root];
+				// process
+		[self setAspectRatio:preserveAspect to:root];
+
+				// encode
+			// video
+		value = [[popupFMLEVideoOutputFormat selectedItem] title];
+		BOOL vp6 = [value isEqualToString:EncodeTypeVP6];
+		[self setValue:value ofXPath:FMLEEncodeVideoFormatName to:root];
+		value = [NSString stringWithFormat:FMLEDatarateOutputSizeFormat,
+				 [comboboxFMLEVideoOutputBitrate stringValue]];
+		[self setValue:value ofXPath:FMLEEncodeVideoDataRate to:root];
+		NSString *width = [txtfldFMLEVideoOutputSizeX stringValue];
+		NSString *height = [txtfldFMLEVideoOutputSizeY stringValue];
+		value = [NSString stringWithFormat:VideoSizeConstructFormat, width, height];
+		[self setValue:value ofXPath:FMLEEncodeVideoOutputSize to:root];
+
+				// video advanced
+			// detach avdanced
+		NSArray *advancedNodes = [root nodesForXPath:FMLEVideoAdvanced error:&err];
+		if ((err != nil) || (advancedNodes != nil))
+			for (NSXMLNode *node in advancedNodes)
+				[node detach];
+		NSMutableArray *advanced = [NSMutableArray array];
+		NSXMLNode *advancedNode = nil;
+		if (vp6 == YES)
+		{		// VP6
+			if (enableVP6KeyframeFrequency == YES)
+			{
+				advancedNode = [NSXMLNode elementWithName:FMLEAdvancedVP6KeyFrameName stringValue:[[popupVP6KeyframeFrequency selectedItem] title]];
+				[advanced addObject:advancedNode];
+			}
+			if (enableVP6Quality == YES)
+			{
+				advancedNode = [NSXMLNode elementWithName:FMLEAdvancedVP6QualityName stringValue:[[popupVP6Quality selectedItem] title]];
+				[advanced addObject:advancedNode];
+			}
+			if (enableVP6NoiseReduction == YES)
+			{
+				advancedNode = [NSXMLNode elementWithName:FMLEAdvancedVP6NRName stringValue:[[popupVP6NoiseReduction selectedItem] title]];
+				[advanced addObject:advancedNode];
+			}
+			if (enableVP6DatarateWindow == YES)
+			{
+				advancedNode = [NSXMLNode elementWithName:FMLEAdvancedVP6DRWindowName stringValue:[[popupVP6DatarateWindow selectedItem] title]];
+				[advanced addObject:advancedNode];
+			}
+			if (enableVP6CPUUseage == YES)
+			{
+				advancedNode = [NSXMLNode elementWithName:FMLEAdvancedVP6CPUUseName stringValue:[[popupVP6CPUUseage selectedItem] title]];
+				[advanced addObject:advancedNode];
+			}
+		}// end VP6
+		else
+		{
+				// H.264
+			if (enableH264Profile == YES)
+			{
+				advancedNode = [NSXMLNode elementWithName:FMLEAdvancedH264ProfName stringValue:[[popupH264Profile selectedItem] title]];
+				[advanced addObject:advancedNode];
+			}
+			if (enableH264Level == YES)
+			{
+				advancedNode = [NSXMLNode elementWithName:FMLEAdvancedH264LevelName stringValue:[[popupH264Level selectedItem] title]];
+				[advanced addObject:advancedNode];
+			}
+			if (enableH264KeyframeFrequency)
+			{
+				advancedNode = [NSXMLNode elementWithName:FMLEAdvancedH264KeyFrameName stringValue:[[popupH264KeyframeFrequency selectedItem] title]];
+				[advanced addObject:advancedNode];
+			}
+		}// end H.264
+		if ([advanced count] != 0)
+		{
+			NSXMLNode *advancedNode = [NSXMLNode elementWithName:FMLEVideoAdvancedNodeName children:advanced attributes:nil];
+			NSXMLElement *elem = [[root elementsForName:FMLEElementKeyEncode] lastObject];
+			elem = [[elem elementsForName:FMLEElementKeyVideo] lastObject];
+			[elem insertChild:advancedNode atIndex:3];
+		}// end
+
+			// audio
+		value = [[popupFMLEAudioOutputFormat selectedItem] title];
+		[self setValue:value ofXPath:FMLEEncodeAudioFormat to:root];
+		value = [[popupFMLEAudioOutputBitrate selectedItem] title];
+		[self setValue:value ofXPath:FMLEEncodeAudioDataRate to:root];
+	}
+	@catch (NSException *exception) {
+		NSLog(@"Exception rised");
+		success = NO;
+	}// end try-catch block
+
+	NSLog(@"%@", [currentFMLEProfile XMLDataWithOptions:<#(NSUInteger)#>:NSXMLDocumentTidyXML|NSXMLNodePrettyPrint]);
+	return success;
+}// end - (BOOL) rebuildProfile
+
+- (void) setAspectRatio:(BOOL)enable to:(NSXMLElement *)element
+{
+	NSError *err = nil;
+		// check have aspect node
+	NSArray *nodes = [element nodesForXPath:FMLEProcessVideoPreserveAspect error:&err];
+	BOOL haveAspect = !((err != nil) || (nodes == nil) | ([nodes count] != 1));
+
+		// process aspect ratio
+	if (enable == YES)
+	{		// enable aspect ratio
+		if (haveAspect == YES)
+			return;	// already there nothing to do
+		// end if set aspect but already there
+
+			// create & add
+		NSXMLNode *aspect = [NSXMLNode elementWithName:FMLEAspectElementName];
+		NSXMLNode *video = [NSXMLNode elementWithName:FMLEProcessVideoElementName children:[NSArray arrayWithObject:aspect] attributes:nil];
+		NSXMLNode *process = [NSXMLNode elementWithName:FMLEProcessElementName children:[NSArray arrayWithObject:video] attributes:nil];
+		[element insertChild:process atIndex:2];
+		return;
+	}
+	else
+	{		// disable (remove aspect ratio)
+		if (haveAspect == NO)
+			return; // not entry nothing to do
+		// end remove but not entry
+
+		nodes = [element nodesForXPath:FMLEProcess error:&err];
+			// detach
+		for (NSXMLNode *node in nodes)
+			[node detach];
+		// end foreach detach node
+	}
+}// end - (void) setAspectRatio:(BOOL)enable to:(NSXMLElement *)element
+
+- (void) setValue:(NSString *)value ofXPath:(NSString *)xPath to:(NSXMLElement *)element
+{
+	NSError *err = nil;
+	NSArray *nodes = [element nodesForXPath:xPath error:&err];
+	if ((err != nil) || (nodes == nil) || ([nodes count] != 1))
+		@throw [NSException exceptionWithName:[err description] reason:[err domain] userInfo:nil];
+
+	NSXMLNode *node = [nodes objectAtIndex:0];
+	if (value != nil)
+		[node setStringValue:value];
+	else
+		[node detach];
+}// end - (void) setValue:(NSString *)value ofXPath:(NSString *)xPath to:(NSXMLElement *)element
 
 - (NSInteger) selectNewItem:(NSPopUpButton *)popup lastIndex:(NSUInteger)lastIndex
 {

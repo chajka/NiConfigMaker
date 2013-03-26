@@ -13,7 +13,8 @@
 #define EmptyString						@""
 #define VideoSizeSeparatorString		@"x"
 #define PathSeparatorString				@"/"
-#define VideoSizeConstructFormat		@"%@x%@"
+#define FMLEVideoSizeConstructFormat	@"%@x%@"
+#define VideoSizeConstructFormat		@"%@x%@;"
 #define FMLEDatarateOutputSizeFormat	@"%@;"
 
 	// FMLE definition
@@ -22,6 +23,9 @@
 #define FMLEProfilePath					@"~/Library/Application Support/Adobe/Flash Media Live Encoder 3.2"
 #define FMLEProfileExtension			@"xml"
 #define FMLEDefalutProfileName			@"startup"
+
+#define FMLEElementKeyEncode			@"encode"
+#define FMLEElementKeyVideo				@"video"
 
 #define FMLECaptureVideoDevice			@"/flashmedialiveencoder_profile/capture/video/device"						//
 #define FMLECaptureVideoFrameRate		@"/flashmedialiveencoder_profile/capture/video/frame_rate"					//
@@ -34,19 +38,36 @@
 #define FMLECaptureAudioInputVolume		@"/flashmedialiveencoder_profile/capture/audio/input_volume"				//
 
 #define FMLEProcessVideoPreserveAspect	@"/flashmedialiveencoder_profile/process/video/preserve_aspect"				//
+#define FMLEProcess						@"/flashmedialiveencoder_profile/process"
+#define FMLEProcessElementName			@"process"
+#define FMLEProcessVideoElementName		@"video"
+#define FMLEAspectElementName			@"preserve_aspect"
 
 #define FMLEEncodeVideoFormatName		@"/flashmedialiveencoder_profile/encode/video/format"						//
 #define FMLEEncodeVideoDataRate			@"/flashmedialiveencoder_profile/encode/video/datarate"						//
 #define FMLEEncodeVideoOutputSize		@"/flashmedialiveencoder_profile/encode/video/outputsize"
 
+#define FMLEVideoAdvancedNodeName		@"advanced"
+#define FMLEVideoAdvancedEntryPoint		@"/flashmedialiveencoder_profile/encode/video"
+#define FMLEVideoAdvanced				@"/flashmedialiveencoder_profile/encode/video/advanced"
 #define FMLEAdvancedVideoVP6KeyFrame	@"/flashmedialiveencoder_profile/encode/video/advanced/keyframe_frequency"	//
+#define FMLEAdvancedVP6KeyFrameName		@"keyframe_frequency"
+#define FMLEAdvancedVP6QualityName		@"quality"
 #define FMLEAdvancedVP6Quality			@"/flashmedialiveencoder_profile/encode/video/advanced/quality"			//
+#define FMLEAdvancedVP6NRName			@"noise_reduction"
 #define FMLEAdvancedVideoVP6NRXpath		@"/flashmedialiveencoder_profile/encode/video/advanced/noise_reduction"	//
+#define FMLEAdvancedVP6DRWindowName		@"datarate_window"
 #define FMLEAdvancedVideoVP6Datarate	@"/flashmedialiveencoder_profile/encode/video/advanced/datarate_window"	//
+#define FMLEAdvancedVP6CPUUseName		@"cpu_usage"
 #define FMLEAdvancedVideoVP6CPUUseage	@"/flashmedialiveencoder_profile/encode/video/advanced/cpu_usage"
+
+#define FMLEAdvancedH264ProfName		@"profile"
 #define FMLEAdvancedH264Profile			@"/flashmedialiveencoder_profile/encode/video/advanced/profile"
+#define FMLEAdvancedH264LevelName		@"level"
 #define FMLEAdvancedVideoH264Level		@"/flashmedialiveencoder_profile/encode/video/advanced/level"
+#define FMLEAdvancedH264KeyFrameName	@"keyframe_frequency"
 #define FMLEAdvancedH264KeyFrame		@"/flashmedialiveencoder_profile/encode/video/advanced/keyframe_frequency"
+
 #define FMLEEncodeAudioFormat			@"/flashmedialiveencoder_profile/encode/audio/format"						//
 #define FMLEEncodeAudioDataRate			@"/flashmedialiveencoder_profile/encode/audio/datarate"						//
 
@@ -90,6 +111,8 @@ enum FMLEAudioFormatValue {
 	// Channel type string
 #define ChannelStereo					@"2"
 #define ChannelMonoral					@"1"
+#define Stereo							@"Stereo"
+#define Monoral							@"Monoral"
 typedef NSInteger AudioChannelValue;
 enum AudioChannelValue {
 	KindStereo = 1001,
@@ -194,5 +217,7 @@ enum FrameRateValue {
 	FrameRate04_00,
 	FrameRate01_00
 };// end enum FrameRate
+
+#define NodeError		@"NodeNotFound or not single"
 
 #endif
